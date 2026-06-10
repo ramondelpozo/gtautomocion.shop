@@ -1,5 +1,5 @@
 # GT Automoción Shop — robots.txt
-# https://gtautomocion-shop-k2j9.vercel.app/
+# https://gtautomocion-shop.vercel.app/
 
 User-agent: *
 Allow: /
@@ -31,4 +31,4 @@ User-agent: ia_archiver
 Allow: /
 
 # Sitemap
-Sitemap: https://gtautomocion-shop-k2j9.vercel.app/sitemap.xml
+Sitemap: https://gtautomocion-shop.vercel.app/sitemap.xml

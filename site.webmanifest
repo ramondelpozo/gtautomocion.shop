@@ -11,13 +11,13 @@
   "categories": ["shopping", "automotive"],
   "icons": [
     {
-      "src": "https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=192",
+      "src": "https://gtautomocion-shop.vercel.app/a4a95dd05107db56339097357141b145922ca5d1.avif",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=512",
+      "src": "https://gtautomocion-shop.vercel.app/a4a95dd05107db56339097357141b145922ca5d1.avif",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

@@ -13,10 +13,10 @@
     <meta name="revisit-after" content="7 days">
     <meta name="rating" content="general">
     <meta name="format-detection" content="telephone=yes">
-    <link rel="canonical" href="https://gtautomocion-shop-k2j9.vercel.app/">
+    <link rel="canonical" href="https://gtautomocion-shop.vercel.app/">
     <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-    <link rel="alternate" hreflang="es-ES" href="https://gtautomocion-shop-k2j9.vercel.app/">
-    <link rel="alternate" hreflang="x-default" href="https://gtautomocion-shop-k2j9.vercel.app/">
+    <link rel="alternate" hreflang="es-ES" href="https://gtautomocion-shop.vercel.app/">
+    <link rel="alternate" hreflang="x-default" href="https://gtautomocion-shop.vercel.app/">
 
     <!-- Geo / SEO local -->
     <meta name="geo.region" content="ES-MD">
@@ -30,7 +30,7 @@
     <meta property="og:site_name" content="GT Automoción Shop">
     <meta property="og:title" content="GT Automoción Shop | Tienda Oficial Ángel Gaitán">
     <meta property="og:description" content="Aditivos, limpieza profesional y accesorios para automoción recomendados por Ángel Gaitán. Tienda física y online en Aranjuez. Envíos a toda España.">
-    <meta property="og:url" content="https://gtautomocion-shop-k2j9.vercel.app/">
+    <meta property="og:url" content="https://gtautomocion-shop.vercel.app/">
     <meta property="og:image" content="https://gtautomocion.shop/cdn/shop/files/Hero1.png?v=1767398900&width=1200">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -44,8 +44,8 @@
     <meta name="twitter:image:alt" content="GT Automoción Shop — Productos oficiales Ángel Gaitán">
 
     <!-- Favicon & PWA -->
-    <link rel="icon" type="image/png" href="https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=32">
-    <link rel="apple-touch-icon" href="https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=180">
+    <link rel="icon" type="image/avif" href="a4a95dd05107db56339097357141b145922ca5d1.avif">
+    <link rel="apple-touch-icon" href="a4a95dd05107db56339097357141b145922ca5d1.avif">
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#050505">
     <meta name="msapplication-TileColor" content="#050505">
@@ -157,7 +157,7 @@
             border-bottom: 1px solid var(--border);
         }
         .header-inner { display: flex; align-items: center; justify-content: space-between; }
-        .logo img { height: 45px; width: auto; filter: brightness(0) invert(1); transition: transform 0.3s ease; }
+        .logo img { height: 48px; width: auto; transition: transform 0.3s ease; }
         .logo:hover img { transform: scale(1.05); }
 
         .main-nav { display: flex; gap: 40px; }
@@ -207,40 +207,53 @@
         .menu-toggle span { width: 24px; height: 2px; background: #fff; transition: all 0.3s ease; }
 
         /* =========================================
-           HERO SLIDER
+           HERO SLIDER (estilo original GT Automoción)
            ========================================= */
-        .hero { position: relative; height: 100vh; min-height: 700px; overflow: hidden; }
+        .hero {
+            position: relative; min-height: clamp(520px, 78vh, 745px);
+            overflow: hidden; background: #000;
+        }
+        .hero-slider { position: relative; width: 100%; height: clamp(520px, 78vh, 745px); }
         .hero-slide {
-            position: absolute; inset: 0; opacity: 0; transition: opacity 1.5s ease;
-            display: flex; align-items: center; justify-content: center;
+            position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease;
+            pointer-events: none;
         }
-        .hero-slide.active { opacity: 1; z-index: 1; }
-        .hero-slide-bg {
-            position: absolute; inset: 0; background-size: cover; background-position: center;
-            animation: kenBurns 15s ease alternate infinite;
+        .hero-slide.active { opacity: 1; z-index: 1; pointer-events: auto; }
+        .hero-slide img {
+            position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
         }
+        .hero-img-mobile { display: none; }
         .hero-overlay {
-            position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(5,5,5,0.3), rgba(5,5,5,0.8));
+            position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(90deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.05) 100%);
         }
         .hero-content {
-            position: relative; z-index: 2; text-align: center; max-width: 900px; padding: 0 24px;
-            animation: fadeUp 1s ease 0.5s both;
+            position: absolute; z-index: 2; top: 50%; transform: translateY(-50%);
+            left: clamp(24px, 8vw, 120px); max-width: 560px; text-align: left;
+            padding-right: 24px;
         }
-        .hero-badge {
-            display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px;
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 50px; font-size: 12px; font-weight: 600; letter-spacing: 1px;
-            text-transform: uppercase; margin-bottom: 24px; backdrop-filter: blur(10px);
-        }
-        .hero-badge .stars { color: #FFD700; }
         .hero-title {
-            font-family: var(--font-heading); font-size: clamp(48px, 8vw, 96px);
-            font-weight: 900; line-height: 0.9; letter-spacing: -2px; margin-bottom: 24px;
-            text-transform: uppercase;
+            font-family: var(--font-heading); font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800; line-height: 1.05; letter-spacing: -0.5px; margin-bottom: 16px;
+            text-transform: uppercase; color: #fff;
         }
-        .hero-title span { color: var(--accent); }
-        .hero-desc { font-size: 18px; color: rgba(255,255,255,0.8); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        
+        .hero-desc {
+            font-size: clamp(14px, 2vw, 18px); color: rgba(255,255,255,0.92);
+            margin-bottom: 20px; line-height: 1.55; max-width: 480px;
+        }
+        .hero-reviews {
+            display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px;
+        }
+        .hero-reviews-rating { color: #F7CE00; font-weight: 700; font-size: 18px; }
+        .hero-reviews-stars { color: #F7CE00; font-size: 16px; letter-spacing: 2px; line-height: 1; }
+        .hero-reviews-count { font-size: 14px; color: rgba(255,255,255,0.88); }
+        .btn-hero {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 16px 36px; background: #E30613; color: #fff; font-weight: 700;
+            font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;
+            border-radius: 8px; transition: all 0.3s ease;
+        }
+        .btn-hero:hover { background: #c80510; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(227,6,19,0.4); }
         .btn-primary {
             display: inline-flex; align-items: center; gap: 12px; padding: 18px 40px;
             background: var(--accent); color: #000; font-weight: 700; font-size: 14px;
@@ -250,16 +263,15 @@
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px var(--accent-glow); }
         .btn-primary svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
         .btn-primary:hover svg { transform: translateX(5px); }
-
         .hero-dots {
-            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-            z-index: 10; display: flex; gap: 12px;
+            position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+            z-index: 10; display: flex; gap: 10px;
         }
         .hero-dot {
-            width: 30px; height: 3px; background: rgba(255,255,255,0.3); border-radius: 2px;
-            cursor: pointer; transition: all 0.3s ease;
+            width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.35);
+            border: none; cursor: pointer; padding: 0; transition: all 0.3s ease;
         }
-        .hero-dot.active { background: var(--accent); width: 50px; }
+        .hero-dot.active { background: #fff; transform: scale(1.25); }
 
         /* =========================================
            FEATURES TICKER
@@ -418,7 +430,7 @@
         .footer-grid {
             display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 60px; margin-bottom: 80px;
         }
-        .footer-logo img { height: 50px; filter: brightness(0) invert(1); margin-bottom: 24px; }
+        .footer-logo img { height: 50px; margin-bottom: 24px; }
         .footer-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px; }
         .footer-socials { display: flex; gap: 12px; }
         .social-link {
@@ -458,17 +470,65 @@
         .footer-legal a:hover { color: var(--accent); }
 
         /* =========================================
-           WHATSAPP FLOAT
+           CHAT + WHATSAPP (estilo original)
            ========================================= */
-        .whatsapp-float {
-            position: fixed; bottom: 30px; right: 30px; z-index: 999;
-            width: 60px; height: 60px; border-radius: 50%; background: #25D366;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
-            animation: pulse 2s infinite; transition: transform 0.3s ease;
+        .chat-widget {
+            position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+            display: flex; flex-direction: column; align-items: flex-end; gap: 14px;
         }
-        .whatsapp-float:hover { transform: scale(1.1); }
-        .whatsapp-float svg { width: 32px; height: 32px; fill: #fff; }
+        .chat-bubble-btn {
+            border: none; background: none; cursor: pointer; padding: 0;
+            transition: transform 0.3s ease; line-height: 0;
+        }
+        .chat-bubble-btn:hover { transform: scale(1.08); }
+        .chat-bubble-btn img {
+            width: 80px; height: 80px; border-radius: 50%;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+        }
+        .whatsapp-direct-btn {
+            width: 56px; height: 56px; border-radius: 50%; background: #25D366;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 14px rgba(37,211,102,0.45);
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-direct-btn:hover { transform: scale(1.08); }
+        .whatsapp-direct-btn svg { width: 30px; height: 30px; fill: #fff; }
+        .chat-panel {
+            position: absolute; bottom: 160px; right: 0; width: 320px;
+            background: #111; border: 1px solid var(--border); border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.55); overflow: hidden;
+            opacity: 0; visibility: hidden; transform: translateY(12px) scale(0.96);
+            transition: all 0.3s var(--transition-smooth); pointer-events: none;
+        }
+        .chat-panel.open {
+            opacity: 1; visibility: visible; transform: translateY(0) scale(1); pointer-events: auto;
+        }
+        .chat-panel-header {
+            display: flex; align-items: center; gap: 12px; padding: 16px;
+            background: #0a0a0a; border-bottom: 1px solid var(--border);
+        }
+        .chat-panel-header img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+        .chat-panel-header strong { display: block; font-size: 14px; }
+        .chat-panel-header span { font-size: 12px; color: var(--text-secondary); }
+        .chat-panel-close {
+            margin-left: auto; width: 32px; height: 32px; border-radius: 50%;
+            border: 1px solid var(--border); background: transparent; color: #fff;
+            font-size: 20px; line-height: 1; cursor: pointer;
+        }
+        .chat-panel-close:hover { border-color: var(--accent); color: var(--accent); }
+        .chat-panel-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+        .chat-message {
+            background: rgba(255,255,255,0.05); border-radius: 12px; padding: 14px;
+            font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.9);
+        }
+        .chat-quick-btn {
+            display: block; padding: 12px 14px; border-radius: 10px; text-align: center;
+            font-size: 13px; font-weight: 600; background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border); transition: all 0.2s ease;
+        }
+        .chat-quick-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .chat-quick-btn--wa { background: rgba(37,211,102,0.12); border-color: rgba(37,211,102,0.35); color: #25D366; }
+        .chat-quick-btn--wa:hover { background: #25D366; color: #fff; border-color: #25D366; }
 
         /* =========================================
            RESPONSIVE
@@ -482,8 +542,20 @@
         }
         @media (max-width: 768px) {
             .section-padding { padding: 80px 0; }
-            .hero { min-height: 600px; }
-            .hero-title { font-size: 48px; }
+            .hero, .hero-slider { min-height: 580px; }
+            .hero-img-desktop { display: none; }
+            .hero-img-mobile { display: block; }
+            .hero-overlay {
+                background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.35) 45%, transparent 100%);
+            }
+            .hero-content {
+                top: auto; bottom: 100px; transform: none;
+                left: 20px; right: 20px; max-width: none; padding-right: 0;
+            }
+            .hero-title { font-size: 36px; }
+            .chat-panel { width: calc(100vw - 40px); max-width: 320px; bottom: 150px; }
+            .chat-bubble-btn img { width: 70px; height: 70px; }
+            .chat-widget { bottom: 15px; right: 15px; }
             .tabs-nav { gap: 20px; overflow-x: auto; justify-content: flex-start; padding-bottom: 15px; }
             .tab-btn { white-space: nowrap; font-size: 13px; }
             .footer-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -512,14 +584,14 @@
         "@graph": [
             {
                 "@type": "AutoPartsStore",
-                "@id": "https://gtautomocion-shop-k2j9.vercel.app/#store",
+                "@id": "https://gtautomocion-shop.vercel.app/#store",
                 "name": "GT Automoción Shop",
                 "alternateName": ["GT Automoción", "GT Automoción Ángel Gaitán"],
                 "description": "Tienda especializada en productos de automoción, detailing y mantenimiento del vehículo. Distribuidor oficial de la gama Ángel Gaitán: aditivos diésel y gasolina, limpieza profesional, guantes y accesorios.",
-                "url": "https://gtautomocion-shop-k2j9.vercel.app/",
+                "url": "https://gtautomocion-shop.vercel.app/",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=328",
+                    "url": "https://gtautomocion-shop.vercel.app/a4a95dd05107db56339097357141b145922ca5d1.avif",
                     "width": 328,
                     "height": 328
                 },
@@ -577,20 +649,20 @@
             },
             {
                 "@type": "WebSite",
-                "@id": "https://gtautomocion-shop-k2j9.vercel.app/#website",
-                "url": "https://gtautomocion-shop-k2j9.vercel.app/",
+                "@id": "https://gtautomocion-shop.vercel.app/#website",
+                "url": "https://gtautomocion-shop.vercel.app/",
                 "name": "GT Automoción Shop",
                 "description": "Tienda online de productos de automoción y detailing — Gama oficial Ángel Gaitán",
-                "publisher": { "@id": "https://gtautomocion-shop-k2j9.vercel.app/#store" },
+                "publisher": { "@id": "https://gtautomocion-shop.vercel.app/#store" },
                 "inLanguage": "es-ES"
             },
             {
                 "@type": "WebPage",
-                "@id": "https://gtautomocion-shop-k2j9.vercel.app/#webpage",
-                "url": "https://gtautomocion-shop-k2j9.vercel.app/",
+                "@id": "https://gtautomocion-shop.vercel.app/#webpage",
+                "url": "https://gtautomocion-shop.vercel.app/",
                 "name": "GT Automoción Shop | Tienda Oficial Ángel Gaitán",
-                "isPartOf": { "@id": "https://gtautomocion-shop-k2j9.vercel.app/#website" },
-                "about": { "@id": "https://gtautomocion-shop-k2j9.vercel.app/#store" },
+                "isPartOf": { "@id": "https://gtautomocion-shop.vercel.app/#website" },
+                "about": { "@id": "https://gtautomocion-shop.vercel.app/#store" },
                 "description": "Compra online aditivos, limpieza y accesorios para coches. Packs diésel, gasolina y limpieza profesional.",
                 "inLanguage": "es-ES"
             },
@@ -613,7 +685,7 @@
                                 "price": "45.00",
                                 "priceCurrency": "EUR",
                                 "availability": "https://schema.org/InStock",
-                                "url": "https://gtautomocion-shop-k2j9.vercel.app/"
+                                "url": "https://gtautomocion-shop.vercel.app/"
                             }
                         }
                     },
@@ -631,7 +703,7 @@
                                 "price": "43.00",
                                 "priceCurrency": "EUR",
                                 "availability": "https://schema.org/InStock",
-                                "url": "https://gtautomocion-shop-k2j9.vercel.app/"
+                                "url": "https://gtautomocion-shop.vercel.app/"
                             }
                         }
                     },
@@ -649,7 +721,7 @@
                                 "price": "27.00",
                                 "priceCurrency": "EUR",
                                 "availability": "https://schema.org/InStock",
-                                "url": "https://gtautomocion-shop-k2j9.vercel.app/"
+                                "url": "https://gtautomocion-shop.vercel.app/"
                             }
                         }
                     },
@@ -667,7 +739,7 @@
                                 "price": "26.00",
                                 "priceCurrency": "EUR",
                                 "availability": "https://schema.org/InStock",
-                                "url": "https://gtautomocion-shop-k2j9.vercel.app/"
+                                "url": "https://gtautomocion-shop.vercel.app/"
                             }
                         }
                     },
@@ -685,7 +757,7 @@
                                 "price": "35.00",
                                 "priceCurrency": "EUR",
                                 "availability": "https://schema.org/InStock",
-                                "url": "https://gtautomocion-shop-k2j9.vercel.app/"
+                                "url": "https://gtautomocion-shop.vercel.app/"
                             }
                         }
                     },
@@ -703,7 +775,7 @@
                                 "price": "125.00",
                                 "priceCurrency": "EUR",
                                 "availability": "https://schema.org/InStock",
-                                "url": "https://gtautomocion-shop-k2j9.vercel.app/"
+                                "url": "https://gtautomocion-shop.vercel.app/"
                             }
                         }
                     }
@@ -714,14 +786,14 @@
                 "author": { "@type": "Person", "name": "Francisco Javier" },
                 "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
                 "reviewBody": "Estoy muy contento con la compra. Ha sido super rápido la entrega. Lo recomiendo al 100%.",
-                "itemReviewed": { "@id": "https://gtautomocion-shop-k2j9.vercel.app/#store" }
+                "itemReviewed": { "@id": "https://gtautomocion-shop.vercel.app/#store" }
             },
             {
                 "@type": "Review",
                 "author": { "@type": "Person", "name": "José María" },
                 "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
                 "reviewBody": "Es un producto inmejorable, súper contento con él, lo seguiré comprando mientras que lo tengan en su página.",
-                "itemReviewed": { "@id": "https://gtautomocion-shop-k2j9.vercel.app/#store" }
+                "itemReviewed": { "@id": "https://gtautomocion-shop.vercel.app/#store" }
             }
         ]
     }
@@ -761,8 +833,8 @@
     <!-- HEADER -->
     <header class="site-header" id="header">
         <div class="container header-inner">
-            <a href="https://gtautomocion-shop-k2j9.vercel.app/" class="logo" aria-label="GT Automoción Shop — Inicio">
-                <img src="https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=328" alt="GT Automoción Shop — Tienda oficial de productos Ángel Gaitán" width="328" height="45">
+            <a href="https://gtautomocion-shop.vercel.app/" class="logo" aria-label="GT Automoción Shop — Inicio">
+                <img src="a4a95dd05107db56339097357141b145922ca5d1.avif" alt="GT Automoción Shop — Tienda oficial de productos Ángel Gaitán" width="328" height="48">
             </a>
             
             <nav class="main-nav" aria-label="Navegación principal">
@@ -818,52 +890,110 @@
 
     <!-- HERO SLIDER -->
     <section class="hero" aria-label="Promociones destacadas">
-        <div class="hero-slide active" data-slide="0">
-            <div class="hero-slide-bg" style="background-image: url('https://gtautomocion.shop/cdn/shop/files/Group_19_1.png?v=1780487500&width=2400')"></div>
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <div class="hero-badge"><span class="stars">★★★★★</span> 1103 Reseñas Verificadas</div>
-                <h1 class="hero-title">¡<span>GRATIS</span>!</h1>
-                <p class="hero-desc">Por la compra de cualquier producto. Disponible en la web y en la tienda física.</p>
-                <a href="https://gtautomocion.shop/collections/promocion" class="btn-primary">Comprar ahora <svg><use href="#icon-arrow-right"/></svg></a>
+        <div class="hero-slider">
+            <!-- Slide 1: GRATIS -->
+            <div class="hero-slide active" data-slide="0">
+                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Group_19_1.png?v=1780487500&width=2400" alt="¡GRATIS! — Regalo por compra en GT Automoción" width="2400" height="745">
+                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/Group_19_2.png?v=1780488565&width=800" alt="¡GRATIS! — Regalo por compra en GT Automoción" width="800" height="1140">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title">¡GRATIS!</h1>
+                    <p class="hero-desc">Por la compra de cualquier producto. Disponible en la web y en la tienda física.</p>
+                    <div class="hero-reviews">
+                        <span class="hero-reviews-rating">5.0</span>
+                        <span class="hero-reviews-stars" aria-hidden="true">★★★★★</span>
+                        <span class="hero-reviews-count">1103 reseñas verificadas</span>
+                    </div>
+                    <a href="https://gtautomocion.shop/collections/todos-los-productos" class="btn-hero">Comprar productos</a>
+                </div>
+            </div>
+            <!-- Slide 2: PACK LIMPIEZA -->
+            <div class="hero-slide" data-slide="1">
+                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Group_13.png?v=1779283717&width=2400" alt="Pack Limpieza GT Automoción" width="2400" height="745">
+                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/Group_14.png?v=1779283744&width=800" alt="Pack Limpieza GT Automoción" width="800" height="1140">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title">PACK LIMPIEZA</h1>
+                    <p class="hero-desc">Neutralizador de olores 500ml + Toallitas CEO + Nitro24</p>
+                    <div class="hero-reviews">
+                        <span class="hero-reviews-rating">5.0</span>
+                        <span class="hero-reviews-stars" aria-hidden="true">★★★★★</span>
+                        <span class="hero-reviews-count">1103 reseñas verificadas</span>
+                    </div>
+                    <a href="https://gtautomocion.shop/products/pack-limpieza" class="btn-hero">Comprar productos</a>
+                </div>
+            </div>
+            <!-- Slide 3: A POR LOS MALOS -->
+            <div class="hero-slide" data-slide="2">
+                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Group_15.png?v=1779454848&width=2400" alt="¡A por los malos! — GT Automoción" width="2400" height="745">
+                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/Group_17_1.png?v=1779454881&width=800" alt="¡A por los malos! — GT Automoción" width="800" height="1140">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title">¡A POR LOS MALOS!</h1>
+                    <div class="hero-reviews">
+                        <span class="hero-reviews-rating">5.0</span>
+                        <span class="hero-reviews-stars" aria-hidden="true">★★★★★</span>
+                        <span class="hero-reviews-count">1103 reseñas verificadas</span>
+                    </div>
+                    <a href="https://gtautomocion.shop/collections/todos-los-productos" class="btn-hero">Comprar productos</a>
+                </div>
+            </div>
+            <!-- Slide 4: PACK DIÉSEL -->
+            <div class="hero-slide" data-slide="3">
+                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL-web.png?v=1770639456&width=2400" alt="Pack Diésel AG-30 + AG-31" width="2400" height="745">
+                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL-movil_1e39a507-50e4-4b60-b0d6-a2cca155aa0f.png?v=1770641049&width=800" alt="Pack Diésel AG-30 + AG-31" width="800" height="1140">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title">PACK DIÉSEL</h1>
+                    <p class="hero-desc">AG-30 + AG-31 POR 45€</p>
+                    <div class="hero-reviews">
+                        <span class="hero-reviews-rating">5.0</span>
+                        <span class="hero-reviews-stars" aria-hidden="true">★★★★★</span>
+                        <span class="hero-reviews-count">1103 reseñas verificadas</span>
+                    </div>
+                    <a href="https://gtautomocion.shop/products/pack-diesel-1" class="btn-hero">Comprar productos</a>
+                </div>
+            </div>
+            <!-- Slide 5: PACK GASOLINA -->
+            <div class="hero-slide" data-slide="4">
+                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Plantilla-Web-Tienda-1920x745.gif?v=1770043452&width=2400" alt="Pack Gasolina AG-40 + AG-41" width="2400" height="745">
+                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/Plantilla-Web-Tienda-786x1140.gif?v=1770043463&width=800" alt="Pack Gasolina AG-40 + AG-41" width="800" height="1140">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title">PACK GASOLINA</h1>
+                    <p class="hero-desc">AG-40 + AG-41 POR 43€</p>
+                    <div class="hero-reviews">
+                        <span class="hero-reviews-rating">5.0</span>
+                        <span class="hero-reviews-stars" aria-hidden="true">★★★★★</span>
+                        <span class="hero-reviews-count">1103 reseñas verificadas</span>
+                    </div>
+                    <a href="https://gtautomocion.shop/products/pack-ag-40-y-ag-41" class="btn-hero">Comprar productos</a>
+                </div>
+            </div>
+            <!-- Slide 6: ÁNGEL GAITÁN -->
+            <div class="hero-slide" data-slide="5">
+                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Hero1.png?v=1767398900&width=2400" alt="La selección oficial de Ángel Gaitán" width="2400" height="745">
+                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/hero1_8f62842b-5c7d-4888-8211-6ec7fdef94c7.png?v=1767398878&width=800" alt="La selección oficial de Ángel Gaitán" width="800" height="1140">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title">La selección oficial de Ángel Gaitán</h1>
+                    <p class="hero-desc">La gama completa de aditivos, limpieza y accesorios recomendados por Ángel Gaitán.</p>
+                    <div class="hero-reviews">
+                        <span class="hero-reviews-rating">5.0</span>
+                        <span class="hero-reviews-stars" aria-hidden="true">★★★★★</span>
+                        <span class="hero-reviews-count">1103 reseñas verificadas</span>
+                    </div>
+                    <a href="https://gtautomocion.shop/collections/ag-angel-gaitan" class="btn-hero">Comprar productos</a>
+                </div>
             </div>
         </div>
-        <div class="hero-slide" data-slide="1">
-            <div class="hero-slide-bg" style="background-image: url('https://gtautomocion.shop/cdn/shop/files/Group_13.png?v=1779283717&width=2400')"></div>
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <div class="hero-badge"><span class="stars">★★★★★</span> Best Seller</div>
-                <h1 class="hero-title">PACK <span>LIMPIEZA</span></h1>
-                <p class="hero-desc">Neutralizador de olores 500ml + Toallitas CEO + Nitro24</p>
-                <a href="https://gtautomocion.shop/products/pack-limpieza" class="btn-primary">Ver Pack <svg><use href="#icon-arrow-right"/></svg></a>
-            </div>
-        </div>
-        <div class="hero-slide" data-slide="2">
-            <div class="hero-slide-bg" style="background-image: url('https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL-web.png?v=1770639456&width=2400')"></div>
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <div class="hero-badge"><span class="stars">★★★★★</span> Oferta Limitada</div>
-                <h1 class="hero-title">PACK <span>DIÉSEL</span></h1>
-                <p class="hero-desc">AG-30 + AG-31 POR 45€</p>
-                <a href="https://gtautomocion.shop/products/pack-diesel-1" class="btn-primary">Comprar Pack <svg><use href="#icon-arrow-right"/></svg></a>
-            </div>
-        </div>
-        <div class="hero-slide" data-slide="3">
-            <div class="hero-slide-bg" style="background-image: url('https://gtautomocion.shop/cdn/shop/files/Hero1.png?v=1767398900&width=2400')"></div>
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <div class="hero-badge"><span class="stars">★★★★★</span> Selección Oficial</div>
-                <h1 class="hero-title">ÁNGEL <span>GAITÁN</span></h1>
-                <p class="hero-desc">La gama completa de aditivos, limpieza y accesorios recomendados por Ángel Gaitán.</p>
-                <a href="https://gtautomocion.shop/collections/ag-angel-gaitan" class="btn-primary">Explorar Gama <svg><use href="#icon-arrow-right"/></svg></a>
-            </div>
-        </div>
-
-        <div class="hero-dots">
-            <div class="hero-dot active" data-slide="0"></div>
-            <div class="hero-dot" data-slide="1"></div>
-            <div class="hero-dot" data-slide="2"></div>
-            <div class="hero-dot" data-slide="3"></div>
+        <div class="hero-dots" role="tablist" aria-label="Slides del hero">
+            <button type="button" class="hero-dot active" data-slide="0" aria-label="Slide 1"></button>
+            <button type="button" class="hero-dot" data-slide="1" aria-label="Slide 2"></button>
+            <button type="button" class="hero-dot" data-slide="2" aria-label="Slide 3"></button>
+            <button type="button" class="hero-dot" data-slide="3" aria-label="Slide 4"></button>
+            <button type="button" class="hero-dot" data-slide="4" aria-label="Slide 5"></button>
+            <button type="button" class="hero-dot" data-slide="5" aria-label="Slide 6"></button>
         </div>
     </section>
 
@@ -1253,7 +1383,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="reveal">
-                    <a href="https://gtautomocion-shop-k2j9.vercel.app/" class="footer-logo"><img src="https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=328" alt="GT Automoción Shop — Tienda oficial Ángel Gaitán en Aranjuez" width="328" height="50"></a>
+                    <a href="https://gtautomocion-shop.vercel.app/" class="footer-logo"><img src="a4a95dd05107db56339097357141b145922ca5d1.avif" alt="GT Automoción Shop — Tienda oficial Ángel Gaitán en Aranjuez" width="328" height="50"></a>
                     <p class="footer-desc">Tienda oficial GT Automoción en Aranjuez (Madrid). Especialistas en productos de automoción, detailing y mantenimiento del vehículo: aditivos diésel y gasolina Ángel Gaitán, limpieza profesional, guantes y accesorios. Envíos a toda España con más de 1.100 reseñas verificadas.</p>
                     <div class="footer-socials">
                         <a href="https://www.instagram.com/gtautomocion_shop/" class="social-link" target="_blank" rel="me noopener noreferrer" aria-label="Instagram GT Automoción"><svg><use href="#icon-instagram"/></svg></a>
@@ -1321,10 +1451,31 @@
         </div>
     </footer>
 
-    <!-- WHATSAPP FLOAT -->
-    <a href="https://api.whatsapp.com/send?phone=34722622822" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Contactar por WhatsApp con GT Automoción">
-        <svg><use href="#icon-whatsapp"/></svg>
-    </a>
+    <!-- CHAT + WHATSAPP -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-panel" id="chatPanel" aria-hidden="true">
+            <div class="chat-panel-header">
+                <img src="burbuja-chat-1.webp" alt="" width="44" height="44">
+                <div>
+                    <strong>GT Automoción</strong>
+                    <span>Atención al cliente</span>
+                </div>
+                <button type="button" class="chat-panel-close" id="chatClose" aria-label="Cerrar chat">&times;</button>
+            </div>
+            <div class="chat-panel-body">
+                <div class="chat-message">¡Hola, compañero! 👋 ¿En qué te podemos ayudar hoy?</div>
+                <a href="https://gtautomocion.shop/collections/todos-los-productos" class="chat-quick-btn">Ver productos</a>
+                <a href="tel:+34919898080" class="chat-quick-btn">Llamar: 919 898 080</a>
+                <a href="https://api.whatsapp.com/send?phone=34722622822&amp;text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20productos%20GT%20Automoci%C3%B3n" class="chat-quick-btn chat-quick-btn--wa" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a>
+            </div>
+        </div>
+        <button type="button" class="chat-bubble-btn" id="chatBubble" aria-label="Abrir chat de ayuda">
+            <img src="burbuja-chat-1.webp" alt="Chat GT Automoción" width="80" height="80">
+        </button>
+        <a href="https://api.whatsapp.com/send?phone=34722622822" target="_blank" rel="noopener noreferrer" class="whatsapp-direct-btn" aria-label="Contactar por WhatsApp directamente">
+            <svg><use href="#icon-whatsapp"/></svg>
+        </a>
+    </div>
 
     <!-- JAVASCRIPT -->
     <script>
@@ -1339,8 +1490,16 @@
         const menuToggle = document.getElementById('menuToggle');
         const menuClose = document.getElementById('menuClose');
         const mobileMenu = document.getElementById('mobileMenu');
-        menuToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
-        menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+            document.getElementById('chatWidget').style.opacity = '0';
+            document.getElementById('chatWidget').style.pointerEvents = 'none';
+        });
+        menuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            document.getElementById('chatWidget').style.opacity = '1';
+            document.getElementById('chatWidget').style.pointerEvents = 'auto';
+        });
 
         // Hero Slider
         const slides = document.querySelectorAll('.hero-slide');
@@ -1362,7 +1521,7 @@
         }
 
         function startSlider() {
-            slideInterval = setInterval(nextSlide, 6000);
+            slideInterval = setInterval(nextSlide, 5000);
         }
 
         dots.forEach((dot, i) => {
@@ -1374,6 +1533,24 @@
         });
 
         startSlider();
+
+        // Chat assistant
+        const chatPanel = document.getElementById('chatPanel');
+        const chatBubble = document.getElementById('chatBubble');
+        const chatClose = document.getElementById('chatClose');
+
+        function toggleChat(open) {
+            const isOpen = open ?? !chatPanel.classList.contains('open');
+            chatPanel.classList.toggle('open', isOpen);
+            chatPanel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+        }
+
+        chatBubble.addEventListener('click', () => toggleChat());
+        chatClose.addEventListener('click', () => toggleChat(false));
+        document.addEventListener('click', (e) => {
+            if (!chatPanel.classList.contains('open')) return;
+            if (!document.getElementById('chatWidget').contains(e.target)) toggleChat(false);
+        });
 
         // Tabs
         const tabBtns = document.querySelectorAll('.tab-btn');
