@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://gtautomocion-shop-k2j9.vercel.app/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&amp;width=328</image:loc>
+      <image:title>GT Automoción Shop — Logo oficial</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL.png?v=1770638263&amp;width=400</image:loc>
+      <image:title>Pack Diésel AG-30 + AG-31 — GT Automoción</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://gtautomocion.shop/cdn/shop/files/Pack-AG-40-y-AG-41_5b643349-4d94-475d-9b93-a2f6631e6c56.png?v=1770041173&amp;width=400</image:loc>
+      <image:title>Pack Gasolina AG-40 + AG-41 — GT Automoción</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://gtautomocion.shop/cdn/shop/files/ag-31-1500x1500_0f86d349-ef39-4929-823e-c894ed2e19b5.png?v=1768396562&amp;width=400</image:loc>
+      <image:title>AG-31 Limpiador Inyección Diésel — Ángel Gaitán</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://gtautomocion.shop/cdn/shop/files/Hero1.png?v=1767398900&amp;width=1200</image:loc>
+      <image:title>Gama oficial Ángel Gaitán — GT Automoción Shop</image:title>
+    </image:image>
+  </url>
+</urlset>
