@@ -58,11 +58,14 @@
     <!-- <meta name="google-site-verification" content="TU_CODIGO_AQUI" /> -->
 
     <!-- Performance -->
-    <link rel="preconnect" href="https://gtautomocion.shop">
+    <link rel="preconnect" href="https://gtautomocion.shop" crossorigin>
     <link rel="dns-prefetch" href="https://gtautomocion.shop">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="https://gtautomocion.shop/cdn/shop/files/Group_19_2.png?v=1780488565&width=600&format=webp" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="https://gtautomocion.shop/cdn/shop/files/Group_19_1.png?v=1780487500&width=1200&format=webp" media="(min-width: 769px)" fetchpriority="high">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
     
     <style>
         /* =========================================
@@ -615,11 +618,12 @@
         .cookie-modal-actions .cookie-btn { flex: 1; min-width: 140px; text-align: center; }
         body.cookie-banner-open { overflow: hidden; }
         .chat-panel {
-            position: absolute; bottom: 160px; right: 0; width: 320px;
+            position: absolute; bottom: 160px; right: 0; width: 340px; max-height: min(520px, 75vh);
             background: #111; border: 1px solid var(--border); border-radius: 16px;
             box-shadow: 0 12px 40px rgba(0,0,0,0.55); overflow: hidden;
             opacity: 0; visibility: hidden; transform: translateY(12px) scale(0.96);
             transition: all 0.3s var(--transition-smooth); pointer-events: none;
+            display: flex; flex-direction: column;
         }
         .chat-panel.open {
             opacity: 1; visibility: visible; transform: translateY(0) scale(1); pointer-events: auto;
@@ -637,6 +641,45 @@
             font-size: 20px; line-height: 1; cursor: pointer;
         }
         .chat-panel-close:hover { border-color: var(--accent); color: var(--accent); }
+        .chat-messages {
+            flex: 1; overflow-y: auto; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px;
+            min-height: 180px; max-height: 280px;
+        }
+        .chat-msg {
+            max-width: 92%; padding: 11px 13px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+        }
+        .chat-msg--bot {
+            align-self: flex-start; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.92);
+        }
+        .chat-msg--user {
+            align-self: flex-end; background: var(--accent-red); color: #fff;
+        }
+        .chat-msg a { color: #7dd3fc; text-decoration: underline; }
+        .chat-msg--bot a { color: #fff; font-weight: 600; }
+        .chat-topics {
+            display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 10px;
+            border-top: 1px solid var(--border);
+        }
+        .chat-topic-btn {
+            padding: 6px 10px; border-radius: 999px; border: 1px solid var(--border);
+            background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.88);
+            font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+        }
+        .chat-topic-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .chat-form {
+            display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border);
+            background: #0a0a0a;
+        }
+        .chat-form input {
+            flex: 1; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border);
+            background: rgba(255,255,255,0.05); color: #fff; font-size: 13px; font-family: var(--font-body);
+        }
+        .chat-form input::placeholder { color: rgba(255,255,255,0.4); }
+        .chat-form button {
+            padding: 10px 14px; border-radius: 8px; border: none; background: var(--accent-red);
+            color: #fff; font-weight: 700; font-size: 12px; cursor: pointer; white-space: nowrap;
+        }
+        .chat-form button:hover { background: #c80510; }
         .chat-panel-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
         .chat-message {
             background: rgba(255,255,255,0.05); border-radius: 12px; padding: 14px;
@@ -913,7 +956,7 @@
                 "url": "https://gtautomocion-shop.vercel.app/",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=400",
+                    "url": "https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=200",
                     "width": 328,
                     "height": 328
                 },
@@ -1000,7 +1043,7 @@
                             "@type": "Product",
                             "name": "PACK DIÉSEL (AG-30 + AG-31)",
                             "description": "Pack de aditivos diésel Ángel Gaitán: tratamiento AG-30 + limpiador inyección AG-31",
-                            "image": "https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL.png?v=1770638263&width=400",
+                            "image": "https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL.png?v=1770638263&width=320",
                             "brand": { "@type": "Brand", "name": "Ángel Gaitán" },
                             "offers": {
                                 "@type": "Offer",
@@ -1018,7 +1061,7 @@
                             "@type": "Product",
                             "name": "PACK GASOLINA (AG-40 + AG-41)",
                             "description": "Pack de aditivos gasolina Ángel Gaitán: tratamiento AG-40 + limpiador inyección AG-41",
-                            "image": "https://gtautomocion.shop/cdn/shop/files/Pack-AG-40-y-AG-41_5b643349-4d94-475d-9b93-a2f6631e6c56.png?v=1770041173&width=400",
+                            "image": "https://gtautomocion.shop/cdn/shop/files/Pack-AG-40-y-AG-41_5b643349-4d94-475d-9b93-a2f6631e6c56.png?v=1770041173&width=320",
                             "brand": { "@type": "Brand", "name": "Ángel Gaitán" },
                             "offers": {
                                 "@type": "Offer",
@@ -1036,7 +1079,7 @@
                             "@type": "Product",
                             "name": "AG-31 Limpiador Inyección Diésel",
                             "description": "Limpiador profesional del sistema de inyección diésel de la gama Ángel Gaitán",
-                            "image": "https://gtautomocion.shop/cdn/shop/files/ag-31-1500x1500_0f86d349-ef39-4929-823e-c894ed2e19b5.png?v=1768396562&width=400",
+                            "image": "https://gtautomocion.shop/cdn/shop/files/ag-31-1500x1500_0f86d349-ef39-4929-823e-c894ed2e19b5.png?v=1768396562&width=320",
                             "brand": { "@type": "Brand", "name": "Ángel Gaitán" },
                             "offers": {
                                 "@type": "Offer",
@@ -1054,7 +1097,7 @@
                             "@type": "Product",
                             "name": "AG-41 Limpiador Inyección Gasolina",
                             "description": "Limpiador profesional del sistema de inyección gasolina de la gama Ángel Gaitán",
-                            "image": "https://gtautomocion.shop/cdn/shop/files/image_3.webp?v=1768326102&width=400",
+                            "image": "https://gtautomocion.shop/cdn/shop/files/image_3.webp?v=1768326102&width=320",
                             "brand": { "@type": "Brand", "name": "Ángel Gaitán" },
                             "offers": {
                                 "@type": "Offer",
@@ -1072,7 +1115,7 @@
                             "@type": "Product",
                             "name": "PACK LIMPIEZA (CEO + Toallitas + Nitro24)",
                             "description": "Pack de limpieza profesional: neutralizador de olores, toallitas CEO y ambientador Nitro24",
-                            "image": "https://gtautomocion.shop/cdn/shop/files/IMG_1822-removebg-preview.png?v=1779282976&width=400",
+                            "image": "https://gtautomocion.shop/cdn/shop/files/IMG_1822-removebg-preview.png?v=1779282976&width=320",
                             "brand": { "@type": "Brand", "name": "GT Automoción" },
                             "offers": {
                                 "@type": "Offer",
@@ -1090,7 +1133,7 @@
                             "@type": "Product",
                             "name": "AG-CA Limpiador a Presión Pack x24",
                             "description": "Pack profesional de 24 unidades de limpiador a presión AG-CA Ángel Gaitán",
-                            "image": "https://gtautomocion.shop/cdn/shop/files/Pack-24-AG-CA-_2_f1edf52b-9979-4203-b9a2-6950a0d5c3c1.png?v=1768395577&width=400",
+                            "image": "https://gtautomocion.shop/cdn/shop/files/Pack-24-AG-CA-_2_f1edf52b-9979-4203-b9a2-6950a0d5c3c1.png?v=1768395577&width=320",
                             "brand": { "@type": "Brand", "name": "Ángel Gaitán" },
                             "offers": {
                                 "@type": "Offer",
@@ -1157,7 +1200,7 @@
     <header class="site-header" id="header">
         <div class="container header-inner">
             <a href="https://gtautomocion-shop.vercel.app/" class="logo" aria-label="GT Automoción Shop — Inicio">
-                <img src="https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=400" alt="GT Automoción Shop — Tienda oficial de productos Ángel Gaitán" width="164" height="43">
+                <img src="https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=200" alt="GT Automoción Shop — Tienda oficial de productos Ángel Gaitán" width="164" height="43">
             </a>
             
             <nav class="main-nav" aria-label="Navegación principal">
@@ -1236,8 +1279,8 @@
         <div class="hero-slider">
             <!-- Slide 1: GRATIS -->
             <div class="hero-slide active" data-slide="0">
-                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Group_19_1.png?v=1780487500&width=2400" alt="¡GRATIS! — Regalo por compra en GT Automoción" width="2400" height="745">
-                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/Group_19_2.png?v=1780488565&width=800" alt="¡GRATIS! — Regalo por compra en GT Automoción" width="800" height="1140">
+                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Group_19_1.png?v=1780487500&width=1200&format=webp" alt="¡GRATIS! — Regalo por compra en GT Automoción" width="2400" height="745" fetchpriority="high" decoding="async">
+                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/Group_19_2.png?v=1780488565&width=600&format=webp" alt="¡GRATIS! — Regalo por compra en GT Automoción" width="800" height="1140" fetchpriority="high" decoding="async">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <h1 class="hero-title">¡GRATIS!</h1>
@@ -1252,8 +1295,8 @@
             </div>
             <!-- Slide 2: PACK LIMPIEZA -->
             <div class="hero-slide" data-slide="1">
-                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Group_13.png?v=1779283717&width=2400" alt="Pack Limpieza GT Automoción" width="2400" height="745">
-                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/Group_14.png?v=1779283744&width=800" alt="Pack Limpieza GT Automoción" width="800" height="1140">
+                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Group_13.png?v=1779283717&width=1200" alt="Pack Limpieza GT Automoción" width="2400" height="745" loading="lazy" decoding="async">
+                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/Group_14.png?v=1779283744&width=600" alt="Pack Limpieza GT Automoción" width="800" height="1140" loading="lazy" decoding="async">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <h1 class="hero-title">PACK LIMPIEZA</h1>
@@ -1268,8 +1311,8 @@
             </div>
             <!-- Slide 3: A POR LOS MALOS -->
             <div class="hero-slide" data-slide="2">
-                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Group_15.png?v=1779454848&width=2400" alt="¡A por los malos! — GT Automoción" width="2400" height="745">
-                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/Group_17_1.png?v=1779454881&width=800" alt="¡A por los malos! — GT Automoción" width="800" height="1140">
+                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Group_15.png?v=1779454848&width=1200" alt="¡A por los malos! — GT Automoción" width="2400" height="745" loading="lazy" decoding="async">
+                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/Group_17_1.png?v=1779454881&width=600" alt="¡A por los malos! — GT Automoción" width="800" height="1140" loading="lazy" decoding="async">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <h1 class="hero-title">¡A POR LOS MALOS!</h1>
@@ -1283,8 +1326,8 @@
             </div>
             <!-- Slide 4: PACK DIÉSEL -->
             <div class="hero-slide" data-slide="3">
-                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL-web.png?v=1770639456&width=2400" alt="Pack Diésel AG-30 + AG-31" width="2400" height="745">
-                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL-movil_1e39a507-50e4-4b60-b0d6-a2cca155aa0f.png?v=1770641049&width=800" alt="Pack Diésel AG-30 + AG-31" width="800" height="1140">
+                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL-web.png?v=1770639456&width=1200" alt="Pack Diésel AG-30 + AG-31" width="2400" height="745" loading="lazy" decoding="async">
+                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL-movil_1e39a507-50e4-4b60-b0d6-a2cca155aa0f.png?v=1770641049&width=600" alt="Pack Diésel AG-30 + AG-31" width="800" height="1140" loading="lazy" decoding="async">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <h1 class="hero-title">PACK DIÉSEL</h1>
@@ -1299,8 +1342,8 @@
             </div>
             <!-- Slide 5: PACK GASOLINA -->
             <div class="hero-slide" data-slide="4">
-                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Plantilla-Web-Tienda-1920x745.gif?v=1770043452&width=2400" alt="Pack Gasolina AG-40 + AG-41" width="2400" height="745">
-                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/Plantilla-Web-Tienda-786x1140.gif?v=1770043463&width=800" alt="Pack Gasolina AG-40 + AG-41" width="800" height="1140">
+                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Plantilla-Web-Tienda-1920x745.gif?v=1770043452&width=1200" alt="Pack Gasolina AG-40 + AG-41" width="2400" height="745" loading="lazy" decoding="async">
+                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/Plantilla-Web-Tienda-786x1140.gif?v=1770043463&width=600" alt="Pack Gasolina AG-40 + AG-41" width="800" height="1140" loading="lazy" decoding="async">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <h1 class="hero-title">PACK GASOLINA</h1>
@@ -1315,8 +1358,8 @@
             </div>
             <!-- Slide 6: ÁNGEL GAITÁN -->
             <div class="hero-slide" data-slide="5">
-                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Hero1.png?v=1767398900&width=2400" alt="La selección oficial de Ángel Gaitán" width="2400" height="745">
-                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/hero1_8f62842b-5c7d-4888-8211-6ec7fdef94c7.png?v=1767398878&width=800" alt="La selección oficial de Ángel Gaitán" width="800" height="1140">
+                <img class="hero-img-desktop" src="https://gtautomocion.shop/cdn/shop/files/Hero1.png?v=1767398900&width=1200" alt="La selección oficial de Ángel Gaitán" width="2400" height="745" loading="lazy" decoding="async">
+                <img class="hero-img-mobile" src="https://gtautomocion.shop/cdn/shop/files/hero1_8f62842b-5c7d-4888-8211-6ec7fdef94c7.png?v=1767398878&width=600" alt="La selección oficial de Ángel Gaitán" width="800" height="1140" loading="lazy" decoding="async">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <h1 class="hero-title">La selección oficial de Ángel Gaitán</h1>
@@ -1369,7 +1412,7 @@
                 <div class="product-card reveal">
                     <span class="product-badge">Más vendido</span>
                     <div class="product-image-wrap">
-                        <img src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL.png?v=1770638263&width=400" alt="Pack Diésel AG-30 + AG-31 Ángel Gaitán — aditivos diésel profesionales" loading="lazy" width="400" height="400">
+                        <img src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL.png?v=1770638263&width=320" alt="Pack Diésel AG-30 + AG-31 Ángel Gaitán — aditivos diésel profesionales" loading="lazy" width="400" height="400">
                     </div>
                     <div class="product-info">
                         <span class="product-category">Pack Diésel</span>
@@ -1387,7 +1430,7 @@
                 <div class="product-card reveal">
                     <span class="product-badge">Más vendido</span>
                     <div class="product-image-wrap">
-                        <img src="https://gtautomocion.shop/cdn/shop/files/Pack-AG-40-y-AG-41_5b643349-4d94-475d-9b93-a2f6631e6c56.png?v=1770041173&width=400" alt="Pack Gasolina AG-40 + AG-41 Ángel Gaitán — aditivos gasolina" loading="lazy" width="400" height="400">
+                        <img src="https://gtautomocion.shop/cdn/shop/files/Pack-AG-40-y-AG-41_5b643349-4d94-475d-9b93-a2f6631e6c56.png?v=1770041173&width=320" alt="Pack Gasolina AG-40 + AG-41 Ángel Gaitán — aditivos gasolina" loading="lazy" width="400" height="400">
                     </div>
                     <div class="product-info">
                         <span class="product-category">Pack Gasolina</span>
@@ -1404,7 +1447,7 @@
                 <!-- Product 3 -->
                 <div class="product-card reveal">
                     <div class="product-image-wrap">
-                        <img src="https://gtautomocion.shop/cdn/shop/files/ag-31-1500x1500_0f86d349-ef39-4929-823e-c894ed2e19b5.png?v=1768396562&width=400" alt="AG-31 Limpiador inyección diésel Ángel Gaitán — limpieza sistema inyección" loading="lazy" width="400" height="400">
+                        <img src="https://gtautomocion.shop/cdn/shop/files/ag-31-1500x1500_0f86d349-ef39-4929-823e-c894ed2e19b5.png?v=1768396562&width=320" alt="AG-31 Limpiador inyección diésel Ángel Gaitán — limpieza sistema inyección" loading="lazy" width="400" height="400">
                     </div>
                     <div class="product-info">
                         <span class="product-category">Ángel Gaitán</span>
@@ -1420,7 +1463,7 @@
                 <!-- Product 4 -->
                 <div class="product-card reveal">
                     <div class="product-image-wrap">
-                        <img src="https://gtautomocion.shop/cdn/shop/files/limpia-cristales-1500x1500_fcc71c7f-df3d-4f65-931c-2b0e53212fa9_1.png?v=1768323027&width=400" alt="Limpiacristales Manzana GT Automoción — limpieza cristales coche" loading="lazy" width="400" height="400">
+                        <img src="https://gtautomocion.shop/cdn/shop/files/limpia-cristales-1500x1500_fcc71c7f-df3d-4f65-931c-2b0e53212fa9_1.png?v=1768323027&width=320" alt="Limpiacristales Manzana GT Automoción — limpieza cristales coche" loading="lazy" width="400" height="400">
                     </div>
                     <div class="product-info">
                         <span class="product-category">Limpieza</span>
@@ -1445,25 +1488,25 @@
             </div>
             <div class="collections-grid">
                 <a href="https://gtautomocion.shop/collections/productos-destacados" class="collection-card large reveal">
-                    <img src="https://gtautomocion.shop/cdn/shop/files/2_04cfcf99-8317-4ab7-b81f-9ed4271728bb.png?v=1767553551&width=800" alt="Colección más vendidos GT Automoción — productos automoción y detailing" loading="lazy" width="800" height="600">
+                    <img src="https://gtautomocion.shop/cdn/shop/files/2_04cfcf99-8317-4ab7-b81f-9ed4271728bb.png?v=1767553551&width=640" alt="Colección más vendidos GT Automoción — productos automoción y detailing" loading="lazy" width="800" height="600">
                     <div class="collection-overlay">
                         <h3 class="collection-title">Más vendidos</h3>
                     </div>
                 </a>
                 <a href="https://gtautomocion.shop/collections/ag-angel-gaitan" class="collection-card wide reveal">
-                    <img src="https://gtautomocion.shop/cdn/shop/files/e1f8486d70662bda05c07e04fd8ae5b103b259fb.png?v=1766921218&width=600" alt="Gama AG Ángel Gaitán — aditivos y limpieza profesional automoción" loading="lazy" width="600" height="300">
+                    <img src="https://gtautomocion.shop/cdn/shop/files/e1f8486d70662bda05c07e04fd8ae5b103b259fb.png?v=1766921218&width=520" alt="Gama AG Ángel Gaitán — aditivos y limpieza profesional automoción" loading="lazy" width="600" height="300">
                     <div class="collection-overlay">
                         <h3 class="collection-title">AG-Ángel Gaitán</h3>
                     </div>
                 </a>
                 <a href="https://gtautomocion.shop/collections/guante-verde" class="collection-card reveal">
-                    <img src="https://gtautomocion.shop/cdn/shop/files/50aee63086f184c071e87fad63145f21375c2446.png?v=1766921215&width=400" alt="Guante Verde GT Automoción — guantes diamantados para detailing" loading="lazy" width="400" height="300">
+                    <img src="https://gtautomocion.shop/cdn/shop/files/50aee63086f184c071e87fad63145f21375c2446.png?v=1766921215&width=320" alt="Guante Verde GT Automoción — guantes diamantados para detailing" loading="lazy" width="400" height="300">
                     <div class="collection-overlay">
                         <h3 class="collection-title">Guante verde</h3>
                     </div>
                 </a>
                 <a href="https://gtautomocion.shop/collections/accesorios-1" class="collection-card reveal">
-                    <img src="https://gtautomocion.shop/cdn/shop/files/55ecef5b33fa228ddd0e8ce50b4e2d222bb066b4.png?v=1766921337&width=400" alt="Accesorios GT Automoción — balizas, lanyards y merchandising" loading="lazy" width="400" height="300">
+                    <img src="https://gtautomocion.shop/cdn/shop/files/55ecef5b33fa228ddd0e8ce50b4e2d222bb066b4.png?v=1766921337&width=320" alt="Accesorios GT Automoción — balizas, lanyards y merchandising" loading="lazy" width="400" height="300">
                     <div class="collection-overlay">
                         <h3 class="collection-title">Accesorios</h3>
                     </div>
@@ -1490,7 +1533,7 @@
             <div class="tab-content active" id="tab-ag">
                 <div class="products-grid">
                     <div class="product-card reveal">
-                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/ag-31-1500x1500_0f86d349-ef39-4929-823e-c894ed2e19b5.png?v=1768396562&width=400" alt="AG-31 Limpiador inyección diésel Ángel Gaitán" loading="lazy" width="400" height="400"></div>
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/ag-31-1500x1500_0f86d349-ef39-4929-823e-c894ed2e19b5.png?v=1768396562&width=320" alt="AG-31 Limpiador inyección diésel Ángel Gaitán" loading="lazy" width="400" height="400"></div>
                         <div class="product-info">
                             <span class="product-category">Inyección</span>
                             <h3 class="product-title">AG-31 LIMPIADOR INYECCIÓN DIÉSEL</h3>
@@ -1499,7 +1542,7 @@
                         </div>
                     </div>
                     <div class="product-card reveal">
-                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/image_3.webp?v=1768326102&width=400" alt="AG-41 Limpiador inyección gasolina Ángel Gaitán" loading="lazy" width="400" height="400"></div>
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/image_3.webp?v=1768326102&width=320" alt="AG-41 Limpiador inyección gasolina Ángel Gaitán" loading="lazy" width="400" height="400"></div>
                         <div class="product-info">
                             <span class="product-category">Inyección</span>
                             <h3 class="product-title">AG-41 LIMPIADOR INYECCIÓN GASOLINA</h3>
@@ -1509,7 +1552,7 @@
                     </div>
                     <div class="product-card reveal">
                         <span class="product-badge">Pack</span>
-                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL.png?v=1770638263&width=400" alt="Pack Diésel AG-30 + AG-31 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL.png?v=1770638263&width=320" alt="Pack Diésel AG-30 + AG-31 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
                         <div class="product-info">
                             <span class="product-category">Packs</span>
                             <h3 class="product-title">PACK DIÉSEL (AG-30 + AG-31)</h3>
@@ -1524,7 +1567,7 @@
                 <div class="products-grid">
                     <div class="product-card reveal">
                         <span class="product-badge">Top Ventas</span>
-                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/IMG_1822-removebg-preview.png?v=1779282976&width=400" alt="Pack Limpieza CEO + Toallitas + Nitro24 GT Automoción" loading="lazy" width="400" height="400"></div>
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/IMG_1822-removebg-preview.png?v=1779282976&width=320" alt="Pack Limpieza CEO + Toallitas + Nitro24 GT Automoción" loading="lazy" width="400" height="400"></div>
                         <div class="product-info">
                             <span class="product-category">Packs</span>
                             <h3 class="product-title">PACK LIMPIEZA (CEO + Toallitas + Nitro24)</h3>
@@ -1533,7 +1576,7 @@
                         </div>
                     </div>
                     <div class="product-card reveal">
-                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/sin_fondo-removebg-preview.png?v=1774010981&width=400" alt="Nitro24 Ambientador larga duración GT Automoción" loading="lazy" width="400" height="400"></div>
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/sin_fondo-removebg-preview.png?v=1774010981&width=320" alt="Nitro24 Ambientador larga duración GT Automoción" loading="lazy" width="400" height="400"></div>
                         <div class="product-info">
                             <span class="product-category">Ambientador</span>
                             <h3 class="product-title">NITRO24 AMBIENTADOR LARGA DURACIÓN</h3>
@@ -1542,7 +1585,7 @@
                         </div>
                     </div>
                     <div class="product-card reveal">
-                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/limpia-cristales-1500x1500_fcc71c7f-df3d-4f65-931c-2b0e53212fa9_1.png?v=1768323027&width=400" alt="Limpiacristales Manzana GT Automoción" loading="lazy" width="400" height="400"></div>
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/limpia-cristales-1500x1500_fcc71c7f-df3d-4f65-931c-2b0e53212fa9_1.png?v=1768323027&width=320" alt="Limpiacristales Manzana GT Automoción" loading="lazy" width="400" height="400"></div>
                         <div class="product-info">
                             <span class="product-category">Cristales</span>
                             <h3 class="product-title">LIMPIACRISTALES MANZANA</h3>
@@ -1556,7 +1599,7 @@
             <div class="tab-content" id="tab-guante">
                 <div class="products-grid">
                     <div class="product-card reveal">
-                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/caja-guantes-1500_626f23a0-6bf1-47c5-b7df-f1eef6e72b85.png?v=1768324206&width=400" alt="Caja de guantes diamantados GT Automoción" loading="lazy" width="400" height="400"></div>
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/caja-guantes-1500_626f23a0-6bf1-47c5-b7df-f1eef6e72b85.png?v=1768324206&width=320" alt="Caja de guantes diamantados GT Automoción" loading="lazy" width="400" height="400"></div>
                         <div class="product-info">
                             <span class="product-category">Guantes</span>
                             <h3 class="product-title">CAJA DE GUANTES DIAMANTADOS</h3>
@@ -1565,7 +1608,7 @@
                         </div>
                     </div>
                     <div class="product-card reveal">
-                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/cubo-guante-diamantado_2cc15a77-f5a9-4146-a773-c3b772869f63.png?v=1768324237&width=400" alt="Cubo de guantes verdes diamantados GT Automoción" loading="lazy" width="400" height="400"></div>
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/cubo-guante-diamantado_2cc15a77-f5a9-4146-a773-c3b772869f63.png?v=1768324237&width=320" alt="Cubo de guantes verdes diamantados GT Automoción" loading="lazy" width="400" height="400"></div>
                         <div class="product-info">
                             <span class="product-category">Guantes</span>
                             <h3 class="product-title">CUBO DE GUANTES VERDES DIAMANTADOS</h3>
@@ -1579,7 +1622,7 @@
             <div class="tab-content" id="tab-accesorios">
                 <div class="products-grid">
                     <div class="product-card reveal">
-                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/todos-los-lanyard.webp?v=1770969857&width=400" alt="Lanyards GT Automoción — merchandising oficial" loading="lazy" width="400" height="400"></div>
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/todos-los-lanyard.webp?v=1770969857&width=320" alt="Lanyards GT Automoción — merchandising oficial" loading="lazy" width="400" height="400"></div>
                         <div class="product-info">
                             <span class="product-category">Merchandising</span>
                             <h3 class="product-title">LANYARDS GT AUTOMOCIÓN</h3>
@@ -1588,7 +1631,7 @@
                         </div>
                     </div>
                     <div class="product-card reveal">
-                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/baliza-hella_5c52e8b4-927a-475d-9d8e-f75f15a1c232.png?v=1768397783&width=400" alt="Baliza conectada Hella V16 — seguridad vial GT Automoción" loading="lazy" width="400" height="400"></div>
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/baliza-hella_5c52e8b4-927a-475d-9d8e-f75f15a1c232.png?v=1768397783&width=320" alt="Baliza conectada Hella V16 — seguridad vial GT Automoción" loading="lazy" width="400" height="400"></div>
                         <div class="product-info">
                             <span class="product-category">Seguridad</span>
                             <h3 class="product-title">BALIZA CONECTADA HELLA</h3>
@@ -1597,7 +1640,7 @@
                         </div>
                     </div>
                     <div class="product-card reveal">
-                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/pulsera_1.webp?v=1768326225&width=400" alt="Pulsera España GT Automoción — merchandising oficial" loading="lazy" width="400" height="400"></div>
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/pulsera_1.webp?v=1768326225&width=320" alt="Pulsera España GT Automoción — merchandising oficial" loading="lazy" width="400" height="400"></div>
                         <div class="product-info">
                             <span class="product-category">Merchandising</span>
                             <h3 class="product-title">PULSERA DE ESPAÑA GT AUTOMOCIÓN</h3>
@@ -1619,7 +1662,7 @@
             <div class="products-grid">
                 <div class="product-card reveal">
                     <span class="product-badge">Más vendido</span>
-                    <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/Pack-24-AG-CA-_2_f1edf52b-9979-4203-b9a2-6950a0d5c3c1.png?v=1768395577&width=400" alt="AG-CA Limpiador a presión pack x24 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
+                    <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/Pack-24-AG-CA-_2_f1edf52b-9979-4203-b9a2-6950a0d5c3c1.png?v=1768395577&width=320" alt="AG-CA Limpiador a presión pack x24 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
                     <div class="product-info">
                         <h3 class="product-title">AG-CA LIMPIADOR A PRESIÓN PACK X24 UDS.</h3>
                         <div class="product-prices"><span class="price-current">125,00€</span><span class="price-old">143,76€</span></div>
@@ -1628,7 +1671,7 @@
                 </div>
                 <div class="product-card reveal">
                     <span class="product-badge">Más vendido</span>
-                    <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL.png?v=1770638263&width=400" alt="Pack Diésel AG-30 + AG-31 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
+                    <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL.png?v=1770638263&width=320" alt="Pack Diésel AG-30 + AG-31 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
                     <div class="product-info">
                         <h3 class="product-title">PACK DIÉSEL</h3>
                         <div class="product-prices"><span class="price-current">45,00€</span><span class="price-old">52,00€</span></div>
@@ -1637,7 +1680,7 @@
                 </div>
                 <div class="product-card reveal">
                     <span class="product-badge">Más vendido</span>
-                    <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/Pack-AG-40-y-AG-41_5b643349-4d94-475d-9b93-a2f6631e6c56.png?v=1770041173&width=400" alt="Pack Gasolina AG-40 + AG-41 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
+                    <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/Pack-AG-40-y-AG-41_5b643349-4d94-475d-9b93-a2f6631e6c56.png?v=1770041173&width=320" alt="Pack Gasolina AG-40 + AG-41 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
                     <div class="product-info">
                         <h3 class="product-title">PACK GASOLINA</h3>
                         <div class="product-prices"><span class="price-current">43,00€</span><span class="price-old">50,00€</span></div>
@@ -1646,7 +1689,7 @@
                 </div>
                 <div class="product-card reveal">
                     <span class="product-badge">Más vendido</span>
-                    <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/Pack-12-AG-13-1500PX_c1ccbd4b-55ba-445a-9450-dce5ff07f12c.png?v=1768398065&width=400" alt="AG-13 Lubricante en seco pack x12 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
+                    <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/Pack-12-AG-13-1500PX_c1ccbd4b-55ba-445a-9450-dce5ff07f12c.png?v=1768398065&width=320" alt="AG-13 Lubricante en seco pack x12 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
                     <div class="product-info">
                         <h3 class="product-title">AG-13 LUBRICANTE EN SECO PACK X12 UDS.</h3>
                         <div class="product-prices"><span class="price-current">245,00€</span><span class="price-old">288,00€</span></div>
@@ -1717,7 +1760,7 @@
         <div class="container">
             <div class="footer-grid-original">
                 <div class="reveal">
-                    <a href="https://gtautomocion-shop.vercel.app/" class="footer-logo"><img src="https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=400" alt="GT Automoción Shop" width="164" height="43"></a>
+                    <a href="https://gtautomocion-shop.vercel.app/" class="footer-logo"><img src="https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=200" alt="GT Automoción Shop" width="164" height="43"></a>
                     <div class="footer-map-top">
                         <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1vxbBwSgpYjVFB4b59uU4AQcHYOzvgDA&ehbc=2E312F" loading="lazy" title="Ubicación tienda GT Automoción en Aranjuez, Madrid"></iframe>
                     </div>
@@ -1789,22 +1832,29 @@
     <div class="chat-widget" id="chatWidget">
         <div class="chat-panel" id="chatPanel" aria-hidden="true">
             <div class="chat-panel-header">
-                <img src="burbuja-chat-1.webp" alt="" width="44" height="44">
+                <img src="burbuja-chat-80.webp" alt="" width="44" height="44" decoding="async">
                 <div>
                     <strong>GT Automoción</strong>
-                    <span>Atención al cliente</span>
+                    <span>Asesor de atención al cliente</span>
                 </div>
                 <button type="button" class="chat-panel-close" id="chatClose" aria-label="Cerrar chat">&times;</button>
             </div>
-            <div class="chat-panel-body">
-                <div class="chat-message">¡Hola, compañero! 👋 ¿En qué te podemos ayudar hoy?</div>
-                <a href="https://gtautomocion.shop/collections/todos-los-productos" class="chat-quick-btn">Ver productos</a>
-                <a href="tel:+34919898080" class="chat-quick-btn">Llamar: 919 898 080</a>
-                <a href="https://api.whatsapp.com/send?phone=34722622822&amp;text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20productos%20GT%20Automoci%C3%B3n" class="chat-quick-btn chat-quick-btn--wa" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a>
+            <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+            <div class="chat-topics" id="chatTopics">
+                <button type="button" class="chat-topic-btn" data-topic="productos">Productos</button>
+                <button type="button" class="chat-topic-btn" data-topic="envios">Envíos</button>
+                <button type="button" class="chat-topic-btn" data-topic="devoluciones">Devoluciones</button>
+                <button type="button" class="chat-topic-btn" data-topic="pagos">Pagos</button>
+                <button type="button" class="chat-topic-btn" data-topic="promos">Ofertas</button>
+                <button type="button" class="chat-topic-btn" data-topic="pedido">Mi pedido</button>
             </div>
+            <form class="chat-form" id="chatForm">
+                <input type="text" id="chatInput" placeholder="Escribe tu pregunta..." autocomplete="off" maxlength="300">
+                <button type="submit">Enviar</button>
+            </form>
         </div>
-        <button type="button" class="chat-bubble-btn" id="chatBubble" aria-label="Abrir chat de ayuda">
-            <img src="burbuja-chat-1.webp" alt="Chat GT Automoción" width="80" height="80">
+        <button type="button" class="chat-bubble-btn" id="chatBubble" aria-label="Abrir asistente virtual">
+            <img src="burbuja-chat-80.webp" srcset="burbuja-chat-80.webp 1x, burbuja-chat-160.webp 2x" alt="Chat GT Automoción" width="80" height="80" decoding="async">
         </button>
     </div>
 
@@ -1980,15 +2030,82 @@
             requestAnimationFrame(tickReviews);
         }
 
-        // Chat assistant
+        // Asistente virtual de atención al cliente GT Automoción
+        const SHOP = 'https://gtautomocion.shop';
         const chatPanel = document.getElementById('chatPanel');
         const chatBubble = document.getElementById('chatBubble');
         const chatClose = document.getElementById('chatClose');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatForm = document.getElementById('chatForm');
+        const chatInput = document.getElementById('chatInput');
+        let chatStarted = false;
+
+        const chatTopics = {
+            productos: `Tenemos cuatro grandes familias:\n• <a href="${SHOP}/collections/ag-angel-gaitan" target="_blank" rel="noopener">AG - Ángel Gaitán</a>: aditivos diésel/gasolina, limpieza de inyección, packs…\n• <a href="${SHOP}/collections/limpieza" target="_blank" rel="noopener">Limpieza</a>: CEO, toallitas, limpiacristales, packs…\n• <a href="${SHOP}/collections/guante-verde" target="_blank" rel="noopener">Guante verde</a>: guantes diamantados.\n• <a href="${SHOP}/collections/accesorios-1" target="_blank" rel="noopener">Accesorios</a>: balizas, lanyards, merchandising.\n\nDestacados: Pack Diésel 45€, Pack Gasolina 43€, AG-31 27€. ¿Buscas diésel, gasolina o limpieza?`,
+            envios: 'Enviamos a toda España. En pedidos desde 60€ el envío es gratuito en península. Plazo habitual: 24-72 h laborables según zona y transportista. Tras comprar en la tienda oficial recibirás confirmación y seguimiento por email. Si necesitas urgencia, llámanos al 919 898 080.',
+            devoluciones: `Puedes consultar la política completa en <a href="${SHOP}/policies/refund-policy" target="_blank" rel="noopener">venta y devoluciones</a>. Si el producto llega defectuoso o incorrecto, contáctanos en tienda@grupogt.shop o por WhatsApp y te indicamos el proceso. Producto sin abrir y en perfecto estado: plazo habitual 14 días desde recepción (según condiciones de la tienda).`,
+            pagos: 'Pagos 100% seguros en la tienda oficial: tarjeta (Visa, Mastercard…), y métodos disponibles en el checkout de Shopify. Todos los precios en EUR €. Si tienes problemas al pagar, prueba otro navegador o escríbenos y te ayudamos.',
+            promos: `Ahora mismo destacan: Pack Diésel (45€, antes 52€), Pack Gasolina (43€, antes 50€) y promoción de regalo en compras (consulta condiciones en <a href="${SHOP}/collections/todos-los-productos" target="_blank" rel="noopener">tienda</a>). Los packs suelen ser la mejor relación calidad-precio frente a comprar por separado.`,
+            pedido: `Para ver el estado de tu pedido entra en <a href="${SHOP}/account" target="_blank" rel="noopener">Mi cuenta</a> en la tienda oficial con el email de compra. Si no lo localizas, escríbenos a tienda@grupogt.shop con tu nombre y número de pedido, o por <a href="https://api.whatsapp.com/send?phone=34722622822" target="_blank" rel="noopener">WhatsApp</a>.`,
+            contacto: 'Tienda física: C/ Antonio Guardiola Sáez, 20, 28300 Aranjuez (Madrid). Horario: L-V 8:00-16:00, Sáb 9:00-14:00. Tel: 919 898 080. Email: tienda@grupogt.shop.',
+            horario: 'Horario de atención: Lunes a viernes 8:00-16:00, sábados 9:00-14:00. Fuera de ese horario puedes dejarnos mensaje por WhatsApp o email y te respondemos lo antes posible.',
+            garantia: 'Los productos Ángel Gaitán son de calidad profesional con fórmulas verificadas. Si recibes un producto defectuoso o dañado en transporte, contáctanos con fotos del embalaje y del producto: te orientamos en cambio o solución según el caso.',
+            diesel: `Para diésel te recomiendo el <a href="${SHOP}/products/pack-diesel-1" target="_blank" rel="noopener">Pack Diésel AG-30 + AG-31</a> (45€): tratamiento + limpieza de inyección. Si solo quieres limpiar inyección, el <a href="${SHOP}/products/ag-31-limpiador-sistema-de-inyeccion-diesel" target="_blank" rel="noopener">AG-31</a> (27€) es la opción individual.`,
+            gasolina: `Para gasolina el <a href="${SHOP}/products/pack-ag-40-y-ag-41" target="_blank" rel="noopener">Pack Gasolina AG-40 + AG-41</a> (43€) es el más vendido. También tienes el AG-41 suelto (26€) para limpieza de inyección gasolina.`,
+            limpieza: `En limpieza destaca el <a href="${SHOP}/products/pack-limpieza" target="_blank" rel="noopener">Pack Limpieza</a> (CEO + toallitas + Nitro24, 35€) y el <a href="${SHOP}/products/limpiacristales-manzana" target="_blank" rel="noopener">Limpiacristales Manzana</a> (16€). ¿Interior, cristales o detailing completo?`,
+            default: `No tengo ese dato exacto aquí, pero puedo ayudarte. Cuéntame un poco más o elige un tema abajo. También puedes llamar al <a href="tel:+34919898080">919 898 080</a> o escribir por <a href="https://api.whatsapp.com/send?phone=34722622822" target="_blank" rel="noopener">WhatsApp</a>.`
+        };
+
+        function addChatMsg(text, type = 'bot') {
+            const el = document.createElement('div');
+            el.className = `chat-msg chat-msg--${type}`;
+            el.innerHTML = text.replace(/\n/g, '<br>');
+            chatMessages.appendChild(el);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function matchChatIntent(text) {
+            const q = text.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+            if (/diesel|diesel|ag-30|ag-31|inyeccion diesel/.test(q)) return chatTopics.diesel;
+            if (/gasolina|ag-40|ag-41|inyeccion gasolina/.test(q)) return chatTopics.gasolina;
+            if (/producto|catalogo|pack|angel|gaitan|guante|accesorio|precio|cuanto|cuesta|stock|comprar|recomiend|mejor/.test(q)) {
+                if (/diesel|diesel/.test(q)) return chatTopics.diesel;
+                if (/gasolina/.test(q)) return chatTopics.gasolina;
+                if (/limpieza|cristal|ceo|toallita|detailing/.test(q)) return chatTopics.limpieza;
+                return chatTopics.productos;
+            }
+            if (/envio|enviar|entrega|recibir|peninsula|gratis|seguimiento|transporte/.test(q)) return chatTopics.envios;
+            if (/devol|reembol|devolver|cambio|defectu|rot|garantia/.test(q)) return chatTopics.devoluciones + ' ' + chatTopics.garantia;
+            if (/pago|tarjeta|paypal|bizum|pagar|checkout/.test(q)) return chatTopics.pagos;
+            if (/promo|oferta|descuento|regalo|gratis/.test(q)) return chatTopics.promos;
+            if (/pedido|seguimiento|donde esta|estado|tracking|cuando lleg/.test(q)) return chatTopics.pedido;
+            if (/horario|hora|abierto|cuando abri|domingo/.test(q)) return chatTopics.horario;
+            if (/contacto|telefono|llamar|email|correo|whatsapp|direccion|aranjuez|tienda fisica/.test(q)) return chatTopics.contacto;
+            if (/limpieza|cristal|ceo|detailing/.test(q)) return chatTopics.limpieza;
+            return chatTopics.default;
+        }
+
+        function startChatIfNeeded() {
+            if (chatStarted) return;
+            chatStarted = true;
+            addChatMsg('¡Hola! Soy el asesor virtual de GT Automoción. Pregúntame por productos, envíos, devoluciones, pagos o tu pedido. Estoy aquí para ayudarte sin complicaciones.');
+        }
 
         function toggleChat(open) {
             const isOpen = open ?? !chatPanel.classList.contains('open');
             chatPanel.classList.toggle('open', isOpen);
             chatPanel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+            if (isOpen) {
+                startChatIfNeeded();
+                setTimeout(() => chatInput?.focus(), 200);
+            }
+        }
+
+        function handleChatQuestion(text) {
+            const trimmed = text.trim();
+            if (!trimmed) return;
+            addChatMsg(trimmed, 'user');
+            setTimeout(() => addChatMsg(matchChatIntent(trimmed)), 350);
         }
 
         chatBubble.addEventListener('click', () => toggleChat());
@@ -1996,6 +2113,20 @@
         document.addEventListener('click', (e) => {
             if (!chatPanel.classList.contains('open')) return;
             if (!document.getElementById('chatWidget').contains(e.target)) toggleChat(false);
+        });
+        chatForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            handleChatQuestion(chatInput.value);
+            chatInput.value = '';
+        });
+        document.querySelectorAll('.chat-topic-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                startChatIfNeeded();
+                const key = btn.dataset.topic;
+                const labels = { productos: '¿Qué productos tenéis?', envios: '¿Cómo funcionan los envíos?', devoluciones: '¿Cuál es la política de devoluciones?', pagos: '¿Qué métodos de pago aceptáis?', promos: '¿Hay ofertas ahora?', pedido: 'Quiero consultar mi pedido' };
+                addChatMsg(labels[key] || btn.textContent, 'user');
+                setTimeout(() => addChatMsg(chatTopics[key] || chatTopics.default), 300);
+            });
         });
 
         // Tabs
@@ -2043,7 +2174,6 @@
         });
 
         // Enlaces a la tienda oficial (gtautomocion.shop)
-        const SHOP = 'https://gtautomocion.shop';
         const productUrls = {
             'PACK DIÉSEL': `${SHOP}/products/pack-diesel-1`,
             'PACK DIÉSEL (AG-30 + AG-31)': `${SHOP}/products/pack-diesel-1`,
@@ -2122,7 +2252,7 @@
 
         const storedConsent = localStorage.getItem(COOKIE_KEY);
         if (!storedConsent) {
-            setTimeout(showCookieBanner, 600);
+            window.addEventListener('load', () => setTimeout(showCookieBanner, 2500));
         } else {
             loadPrefsToModal(storedConsent);
         }
