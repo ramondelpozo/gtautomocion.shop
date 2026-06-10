@@ -72,18 +72,25 @@
             --bg-primary: #050505;
             --bg-secondary: #0a0a0a;
             --bg-card: rgba(255, 255, 255, 0.02);
-            --bg-glass: rgba(10, 10, 10, 0.7);
+            --bg-glass: rgba(10, 10, 10, 0.95);
+            --bg-light: #ffffff;
+            --bg-light-card: #f3f3f3;
             --text-primary: #ffffff;
+            --text-dark: #121212;
             --text-secondary: #888888;
+            --text-muted: #666666;
             --accent: #00E676;
+            --accent-red: #E30613;
             --accent-glow: rgba(0, 230, 118, 0.3);
             --accent-dark: #00c853;
             --border: rgba(255, 255, 255, 0.08);
+            --border-light: #e5e5e5;
             --border-hover: rgba(255, 255, 255, 0.2);
             --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Inter', sans-serif;
             --transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
             --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --header-height: 76px;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -148,12 +155,11 @@
            ========================================= */
         .site-header {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            padding: 24px 0; transition: all 0.4s ease;
-            border-bottom: 1px solid transparent;
+            padding: 16px 0; transition: all 0.4s ease;
+            background: #000; border-bottom: 1px solid var(--border);
         }
         .site-header.scrolled {
-            padding: 16px 0; background: var(--bg-glass);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            background: #000;
             border-bottom: 1px solid var(--border);
         }
         .header-inner { display: flex; align-items: center; justify-content: space-between; }
@@ -171,8 +177,8 @@
             content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
             background: var(--accent); transition: width 0.3s ease;
         }
-        .nav-link:hover::after { width: 100%; }
-        .nav-link:hover { color: var(--accent); }
+        .nav-link:hover::after { width: 100%; background: var(--accent-red); }
+        .nav-link:hover { color: #fff; }
         .nav-link svg { width: 10px; height: 10px; transition: transform 0.3s ease; }
         .nav-item:hover .nav-link svg { transform: rotate(180deg); }
 
@@ -188,7 +194,7 @@
             display: block; padding: 10px 16px; font-size: 13px; font-weight: 400;
             border-radius: 8px; transition: all 0.2s ease; color: var(--text-secondary);
         }
-        .dropdown a:hover { background: rgba(255,255,255,0.05); color: var(--accent); padding-left: 24px; }
+        .dropdown a:hover { background: rgba(255,255,255,0.05); color: #fff; padding-left: 24px; }
 
         .header-actions { display: flex; align-items: center; gap: 24px; }
         .action-btn {
@@ -462,7 +468,7 @@
 
         .footer-bottom {
             border-top: 1px solid var(--border); padding-top: 40px;
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+            display: flex; flex-direction: column; align-items: center; gap: 16px;
         }
         .copyright { font-size: 13px; color: var(--text-secondary); }
         .footer-legal { display: flex; gap: 24px; }
@@ -531,14 +537,201 @@
         .chat-quick-btn--wa:hover { background: #25D366; color: #fff; border-color: #25D366; }
 
         /* =========================================
+           TRUST BARS (estilo original)
+           ========================================= */
+        .trust-bar-top {
+            margin-top: var(--header-height); background: #000;
+            border-bottom: 1px solid var(--border); padding: 14px 0;
+        }
+        .trust-bar-top-inner {
+            display: flex; align-items: center; justify-content: center;
+            gap: clamp(16px, 4vw, 48px); flex-wrap: wrap;
+        }
+        .trust-bar-item {
+            display: flex; align-items: center; gap: 10px; white-space: nowrap;
+        }
+        .trust-bar-item svg { width: 28px; height: 28px; color: var(--accent); flex-shrink: 0; }
+        .trust-bar-item span { font-size: 13px; font-weight: 600; color: #fff; letter-spacing: 0.3px; }
+
+        .hero-trust-bar {
+            background: #0a0a0a; border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border); padding: 28px 0;
+        }
+        .hero-trust-inner {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: center;
+        }
+        .hero-trust-item {
+            display: flex; flex-direction: column; align-items: center; gap: 12px;
+        }
+        .hero-trust-item svg { width: 36px; height: 36px; color: var(--accent); }
+        .hero-trust-item span { font-size: 14px; font-weight: 600; color: #fff; }
+
+        /* =========================================
+           SECCIONES CLARAS (estilo original)
+           ========================================= */
+        .section-light {
+            background: var(--bg-light); color: var(--text-dark);
+        }
+        .section-light.section-padding { padding: 56px 0; }
+        .section-light .section-header { text-align: left; margin-bottom: 36px; }
+        .section-light .section-subtitle { display: none; }
+        .section-light .section-title {
+            font-size: clamp(22px, 3vw, 32px); font-weight: 700;
+            color: var(--text-dark); letter-spacing: 0;
+        }
+        .section-light .products-grid {
+            grid-template-columns: repeat(4, 1fr); gap: 20px;
+        }
+        .section-light .product-card {
+            background: var(--bg-light-card); border: 1px solid var(--border-light);
+            border-radius: 16px; box-shadow: none;
+        }
+        .section-light .product-card::before { display: none; }
+        .section-light .product-card:hover {
+            transform: translateY(-4px); border-color: #ddd;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        .section-light .product-badge {
+            background: #121212; color: #fff; font-size: 10px;
+            padding: 5px 10px; border-radius: 6px;
+        }
+        .section-light .product-image-wrap {
+            background: transparent; height: 220px; padding: 24px 20px 12px;
+        }
+        .section-light .product-image-wrap img {
+            filter: none; max-height: 180px;
+        }
+        .section-light .product-card:hover .product-image-wrap img {
+            transform: scale(1.05); rotate: 0deg;
+        }
+        .section-light .product-category { display: none; }
+        .section-light .product-info {
+            position: relative; padding: 8px 56px 20px 20px; flex-grow: 1;
+        }
+        .section-light .product-title {
+            font-size: 13px; font-weight: 700; color: var(--text-dark);
+            text-transform: uppercase; margin-bottom: 8px; line-height: 1.35;
+        }
+        .section-light .product-prices { margin-bottom: 0; gap: 8px; margin-top: auto; }
+        .section-light .price-current { font-size: 17px; font-weight: 700; color: var(--text-dark); }
+        .section-light .price-old { font-size: 14px; color: #999; }
+        .section-light .btn-add-cart {
+            position: absolute; bottom: 16px; right: 16px;
+            width: 44px; height: 44px; min-width: 44px; padding: 0;
+            border-radius: 50%; background: var(--accent-red); border: none;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0; color: transparent; overflow: hidden;
+        }
+        .section-light .btn-add-cart:hover {
+            background: #c80510; transform: scale(1.08); color: transparent;
+        }
+        .section-light .btn-add-cart svg {
+            width: 20px; height: 20px; color: #fff; flex-shrink: 0;
+        }
+
+        .section-light .collections-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: minmax(200px, 280px) minmax(200px, 280px);
+            gap: 16px;
+        }
+        .section-light .collection-card {
+            border: none; border-radius: 16px;
+        }
+        .section-light .collection-card.large { grid-row: 1 / 3; grid-column: 1; }
+        .section-light .collection-card.wide { grid-column: 2 / 4; grid-row: 1; }
+        .section-light .collection-overlay { padding: 24px; }
+        .section-light .collection-title { font-size: 20px; }
+        .section-light .collection-link { color: #fff; }
+
+        .section-tabs .section-header { display: none; }
+        .section-light .tabs-nav {
+            justify-content: flex-start; gap: 12px; margin-bottom: 40px;
+            border-bottom: none; padding-bottom: 0; flex-wrap: wrap;
+        }
+        .section-light .tab-btn {
+            padding: 10px 20px; border: 1px solid #ddd; border-radius: 999px;
+            background: #fff; color: #333; font-size: 13px; letter-spacing: 0;
+        }
+        .section-light .tab-btn::after { display: none; }
+        .section-light .tab-btn.active {
+            border: 2px solid #121212; color: #121212; font-weight: 700;
+        }
+        .section-light .tab-btn:hover { border-color: #999; color: #121212; }
+
+        /* =========================================
+           RESEÑAS CARRUSEL (estilo original)
+           ========================================= */
+        .reviews-carousel-wrap { position: relative; }
+        .reviews-carousel { overflow: hidden; margin: 0 -4px; }
+        .reviews-track {
+            display: flex; gap: 20px; transition: transform 0.45s var(--transition-smooth);
+            will-change: transform;
+        }
+        .review-card {
+            flex: 0 0 calc(25% - 15px); min-width: calc(25% - 15px);
+            background: var(--bg-light-card); border: 1px solid #ddd;
+            border-radius: 12px; padding: 24px; display: flex; flex-direction: column;
+            min-height: 220px;
+        }
+        .review-stars { color: #F7CE00; font-size: 16px; letter-spacing: 2px; margin-bottom: 12px; }
+        .review-product { font-weight: 700; font-size: 14px; color: var(--text-dark); margin-bottom: 8px; }
+        .review-text {
+            font-size: 13px; color: #555; line-height: 1.6; flex-grow: 1; margin-bottom: 16px;
+        }
+        .review-text .read-more { color: var(--text-dark); font-weight: 600; cursor: pointer; }
+        .review-footer { display: flex; justify-content: space-between; align-items: center; }
+        .review-author { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+        .review-more { color: #999; font-size: 18px; letter-spacing: 2px; line-height: 1; }
+        .reviews-nav {
+            position: absolute; bottom: 20px; right: 0;
+            display: flex; gap: 10px; margin-top: 0; z-index: 2;
+        }
+        .reviews-nav button {
+            width: 44px; height: 44px; border-radius: 50%; border: 1px solid #ccc;
+            background: #fff; color: #888; font-size: 22px; line-height: 1;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.2s ease;
+        }
+        .reviews-nav button:hover { border-color: #121212; color: #121212; }
+        .reviews-nav button:disabled { opacity: 0.35; cursor: default; }
+
+        /* Footer estilo original */
+        .site-footer { background: #1a1a1a; }
+        .footer-grid-original {
+            display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr 1fr;
+            gap: 32px; margin-bottom: 60px;
+        }
+        .footer-map-top {
+            width: 100%; height: 160px; border-radius: 8px; overflow: hidden;
+            margin-top: 16px; border: 1px solid var(--border);
+        }
+        .footer-map-top iframe { width: 100%; height: 100%; border: 0; filter: none; }
+        .footer-social-list { display: flex; flex-direction: column; gap: 10px; }
+        .footer-social-list a {
+            display: flex; align-items: center; gap: 10px; font-size: 14px;
+            color: var(--text-secondary); transition: color 0.2s;
+        }
+        .footer-social-list a:hover { color: #fff; }
+        .footer-social-list svg { width: 18px; height: 18px; }
+
+        /* =========================================
            RESPONSIVE
            ========================================= */
         @media (max-width: 1024px) {
             .main-nav { display: none; }
             .menu-toggle { display: flex; }
-            .collections-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
-            .collection-card.large { grid-column: span 2; }
-            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .section-light .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .section-light .collections-grid {
+                grid-template-columns: 1fr 1fr; grid-template-rows: auto;
+            }
+            .section-light .collection-card.large { grid-row: auto; grid-column: span 2; }
+            .section-light .collection-card.wide { grid-column: span 2; grid-row: auto; }
+            .review-card { flex: 0 0 calc(50% - 10px); min-width: calc(50% - 10px); }
+            .footer-grid, .footer-grid-original { grid-template-columns: repeat(2, 1fr); }
+            .hero-trust-inner { grid-template-columns: 1fr; gap: 20px; }
+            .trust-bar-top-inner { gap: 12px 20px; }
+            .trust-bar-item span { font-size: 11px; }
         }
         @media (max-width: 768px) {
             .section-padding { padding: 80px 0; }
@@ -558,7 +751,9 @@
             .chat-widget { bottom: 15px; right: 15px; }
             .tabs-nav { gap: 20px; overflow-x: auto; justify-content: flex-start; padding-bottom: 15px; }
             .tab-btn { white-space: nowrap; font-size: 13px; }
-            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-grid, .footer-grid-original { grid-template-columns: 1fr; gap: 40px; }
+            .review-card { flex: 0 0 calc(100% - 8px); min-width: calc(100% - 8px); }
+            .section-light .products-grid { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; text-align: center; }
             .footer-legal { flex-wrap: wrap; justify-content: center; }
         }
@@ -888,6 +1083,17 @@
         </nav>
     </div>
 
+    <!-- TRUST BAR (bajo header, como original) -->
+    <section class="trust-bar-top" aria-label="Ventajas GT Automoción">
+        <div class="container trust-bar-top-inner">
+            <div class="trust-bar-item"><svg><use href="#feat-trato"/></svg><span>Trato directo</span></div>
+            <div class="trust-bar-item"><svg><use href="#feat-calidad"/></svg><span>Calidad profesional</span></div>
+            <div class="trust-bar-item"><svg><use href="#feat-etiqueta"/></svg><span>Etiquetado transparente</span></div>
+            <div class="trust-bar-item"><svg><use href="#feat-formula"/></svg><span>Fórmulas verificadas</span></div>
+            <div class="trust-bar-item"><svg><use href="#feat-rendimiento"/></svg><span>Máximo rendimiento</span></div>
+        </div>
+    </section>
+
     <!-- HERO SLIDER -->
     <section class="hero" aria-label="Promociones destacadas">
         <div class="hero-slider">
@@ -997,38 +1203,34 @@
         </div>
     </section>
 
-    <!-- FEATURES TICKER -->
-    <section class="ticker-section">
-        <div class="ticker-track">
-            <div class="ticker-item"><svg><use href="#feat-trato"/></svg><span>Trato Directo</span></div>
-            <div class="ticker-item"><svg><use href="#feat-calidad"/></svg><span>Calidad Profesional</span></div>
-            <div class="ticker-item"><svg><use href="#feat-etiqueta"/></svg><span>Etiquetado Transparente</span></div>
-            <div class="ticker-item"><svg><use href="#feat-formula"/></svg><span>Fórmulas Verificadas</span></div>
-            <div class="ticker-item"><svg><use href="#feat-rendimiento"/></svg><span>Máximo Rendimiento</span></div>
-            <div class="ticker-item"><svg><use href="#feat-envio"/></svg><span>Envíos a toda España</span></div>
-            <div class="ticker-item"><svg><use href="#feat-seguro"/></svg><span>Pago 100% Seguro</span></div>
-            <!-- Duplicado para loop infinito -->
-            <div class="ticker-item"><svg><use href="#feat-trato"/></svg><span>Trato Directo</span></div>
-            <div class="ticker-item"><svg><use href="#feat-calidad"/></svg><span>Calidad Profesional</span></div>
-            <div class="ticker-item"><svg><use href="#feat-etiqueta"/></svg><span>Etiquetado Transparente</span></div>
-            <div class="ticker-item"><svg><use href="#feat-formula"/></svg><span>Fórmulas Verificadas</span></div>
-            <div class="ticker-item"><svg><use href="#feat-rendimiento"/></svg><span>Máximo Rendimiento</span></div>
-            <div class="ticker-item"><svg><use href="#feat-envio"/></svg><span>Envíos a toda España</span></div>
-            <div class="ticker-item"><svg><use href="#feat-seguro"/></svg><span>Pago 100% Seguro</span></div>
+    <!-- TRUST BAR HERO (3 iconos bajo el hero) -->
+    <section class="hero-trust-bar" aria-label="Garantías de compra">
+        <div class="container hero-trust-inner">
+            <div class="hero-trust-item">
+                <svg><use href="#feat-envio"/></svg>
+                <span>Envíos a toda España</span>
+            </div>
+            <div class="hero-trust-item">
+                <svg><use href="#feat-seguro"/></svg>
+                <span>Pago 100% seguro</span>
+            </div>
+            <div class="hero-trust-item">
+                <svg><use href="#feat-calidad"/></svg>
+                <span>Productos de alta calidad</span>
+            </div>
         </div>
     </section>
 
     <!-- LATEST PRODUCTS -->
-    <section class="section-padding" style="background: var(--bg-primary);">
+    <section class="section-light section-padding">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-subtitle">Novedades</span>
-                <h2 class="section-title">Últimos Productos</h2>
+                <h2 class="section-title">Últimos productos</h2>
             </div>
             <div class="products-grid">
                 <!-- Product 1 -->
                 <div class="product-card reveal">
-                    <span class="product-badge">Más Vendido</span>
+                    <span class="product-badge">Más vendido</span>
                     <div class="product-image-wrap">
                         <img src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL.png?v=1770638263&width=400" alt="Pack Diésel AG-30 + AG-31 Ángel Gaitán — aditivos diésel profesionales" loading="lazy" width="400" height="400">
                     </div>
@@ -1046,7 +1248,7 @@
                 </div>
                 <!-- Product 2 -->
                 <div class="product-card reveal">
-                    <span class="product-badge">Oferta</span>
+                    <span class="product-badge">Más vendido</span>
                     <div class="product-image-wrap">
                         <img src="https://gtautomocion.shop/cdn/shop/files/Pack-AG-40-y-AG-41_5b643349-4d94-475d-9b93-a2f6631e6c56.png?v=1770041173&width=400" alt="Pack Gasolina AG-40 + AG-41 Ángel Gaitán — aditivos gasolina" loading="lazy" width="400" height="400">
                     </div>
@@ -1099,39 +1301,34 @@
     </section>
 
     <!-- COLLECTIONS -->
-    <section class="section-padding" style="background: var(--bg-secondary);">
+    <section class="section-light section-padding">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-subtitle">Categorías</span>
-                <h2 class="section-title">Nuestras Colecciones</h2>
+                <h2 class="section-title">Nuestras colecciones</h2>
             </div>
             <div class="collections-grid">
                 <a href="https://gtautomocion.shop/collections/productos-destacados" class="collection-card large reveal">
                     <img src="https://gtautomocion.shop/cdn/shop/files/2_04cfcf99-8317-4ab7-b81f-9ed4271728bb.png?v=1767553551&width=800" alt="Colección más vendidos GT Automoción — productos automoción y detailing" loading="lazy" width="800" height="600">
                     <div class="collection-overlay">
-                        <h3 class="collection-title">Más Vendidos</h3>
-                        <span class="collection-link">Explorar <svg><use href="#icon-arrow-right"/></svg></span>
+                        <h3 class="collection-title">Más vendidos</h3>
                     </div>
                 </a>
-                <a href="https://gtautomocion.shop/collections/ag-angel-gaitan" class="collection-card reveal">
+                <a href="https://gtautomocion.shop/collections/ag-angel-gaitan" class="collection-card wide reveal">
                     <img src="https://gtautomocion.shop/cdn/shop/files/e1f8486d70662bda05c07e04fd8ae5b103b259fb.png?v=1766921218&width=600" alt="Gama AG Ángel Gaitán — aditivos y limpieza profesional automoción" loading="lazy" width="600" height="300">
                     <div class="collection-overlay">
                         <h3 class="collection-title">AG-Ángel Gaitán</h3>
-                        <span class="collection-link">Ver gama <svg><use href="#icon-arrow-right"/></svg></span>
                     </div>
                 </a>
                 <a href="https://gtautomocion.shop/collections/guante-verde" class="collection-card reveal">
                     <img src="https://gtautomocion.shop/cdn/shop/files/50aee63086f184c071e87fad63145f21375c2446.png?v=1766921215&width=400" alt="Guante Verde GT Automoción — guantes diamantados para detailing" loading="lazy" width="400" height="300">
                     <div class="collection-overlay">
-                        <h3 class="collection-title">Guante Verde</h3>
-                        <span class="collection-link">Ver productos <svg><use href="#icon-arrow-right"/></svg></span>
+                        <h3 class="collection-title">Guante verde</h3>
                     </div>
                 </a>
-                <a href="https://gtautomocion.shop/collections/accesorios-1" class="collection-card reveal" style="grid-column: span 2;">
+                <a href="https://gtautomocion.shop/collections/accesorios-1" class="collection-card reveal">
                     <img src="https://gtautomocion.shop/cdn/shop/files/55ecef5b33fa228ddd0e8ce50b4e2d222bb066b4.png?v=1766921337&width=400" alt="Accesorios GT Automoción — balizas, lanyards y merchandising" loading="lazy" width="400" height="300">
                     <div class="collection-overlay">
                         <h3 class="collection-title">Accesorios</h3>
-                        <span class="collection-link">Ver todo <svg><use href="#icon-arrow-right"/></svg></span>
                     </div>
                 </a>
             </div>
@@ -1139,7 +1336,7 @@
     </section>
 
     <!-- OUR PRODUCTS (TABS) -->
-    <section class="section-padding" style="background: var(--bg-primary);">
+    <section class="section-light section-padding section-tabs">
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-subtitle">Catálogo</span>
@@ -1277,102 +1474,102 @@
     </section>
 
     <!-- BEST SELLERS -->
-    <section class="section-padding" style="background: var(--bg-secondary);">
+    <section class="section-light section-padding">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-subtitle">Los favoritos</span>
-                <h2 class="section-title">Más Vendidos</h2>
+                <h2 class="section-title">Más vendidos</h2>
             </div>
             <div class="products-grid">
                 <div class="product-card reveal">
-                    <span class="product-badge">-13%</span>
+                    <span class="product-badge">Más vendido</span>
                     <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/Pack-24-AG-CA-_2_f1edf52b-9979-4203-b9a2-6950a0d5c3c1.png?v=1768395577&width=400" alt="AG-CA Limpiador a presión pack x24 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
                     <div class="product-info">
-                        <span class="product-category">Pack Profesional</span>
-                        <h3 class="product-title">AG-CA LIMPIADOR A PRESIÓN PACK X24</h3>
+                        <h3 class="product-title">AG-CA LIMPIADOR A PRESIÓN PACK X24 UDS.</h3>
                         <div class="product-prices"><span class="price-current">125,00€</span><span class="price-old">143,76€</span></div>
-                        <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                        <button class="btn-add-cart" aria-label="Añadir al carrito"><svg><use href="#icon-cart"/></svg> Añadir</button>
                     </div>
                 </div>
                 <div class="product-card reveal">
-                    <span class="product-badge">-15%</span>
-                    <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/Pack-12-AG-13-1500PX_c1ccbd4b-55ba-445a-9450-dce5ff07f12c.png?v=1768398065&width=400" alt="AG-13 Lubricante en seco pack x12 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
-                    <div class="product-info">
-                        <span class="product-category">Pack Profesional</span>
-                        <h3 class="product-title">AG-13 LUBRICANTE EN SECO PACK X12</h3>
-                        <div class="product-prices"><span class="price-current">245,00€</span><span class="price-old">288,00€</span></div>
-                        <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
-                    </div>
-                </div>
-                <div class="product-card reveal">
-                    <span class="product-badge">Top</span>
+                    <span class="product-badge">Más vendido</span>
                     <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL.png?v=1770638263&width=400" alt="Pack Diésel AG-30 + AG-31 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
                     <div class="product-info">
-                        <span class="product-category">Pack Diésel</span>
-                        <h3 class="product-title">PACK DIÉSEL (AG-30 + AG-31)</h3>
+                        <h3 class="product-title">PACK DIÉSEL</h3>
                         <div class="product-prices"><span class="price-current">45,00€</span><span class="price-old">52,00€</span></div>
-                        <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                        <button class="btn-add-cart" aria-label="Añadir al carrito"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                    </div>
+                </div>
+                <div class="product-card reveal">
+                    <span class="product-badge">Más vendido</span>
+                    <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/Pack-AG-40-y-AG-41_5b643349-4d94-475d-9b93-a2f6631e6c56.png?v=1770041173&width=400" alt="Pack Gasolina AG-40 + AG-41 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">PACK GASOLINA</h3>
+                        <div class="product-prices"><span class="price-current">43,00€</span><span class="price-old">50,00€</span></div>
+                        <button class="btn-add-cart" aria-label="Añadir al carrito"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                    </div>
+                </div>
+                <div class="product-card reveal">
+                    <span class="product-badge">Más vendido</span>
+                    <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/Pack-12-AG-13-1500PX_c1ccbd4b-55ba-445a-9450-dce5ff07f12c.png?v=1768398065&width=400" alt="AG-13 Lubricante en seco pack x12 Ángel Gaitán" loading="lazy" width="400" height="400"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">AG-13 LUBRICANTE EN SECO PACK X12 UDS.</h3>
+                        <div class="product-prices"><span class="price-current">245,00€</span><span class="price-old">288,00€</span></div>
+                        <button class="btn-add-cart" aria-label="Añadir al carrito"><svg><use href="#icon-cart"/></svg> Añadir</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section class="section-padding" style="background: var(--bg-primary);">
+    <!-- TESTIMONIALS CAROUSEL -->
+    <section class="section-light section-padding">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-subtitle">Opiniones</span>
-                <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+                <h2 class="section-title">¿Qué dicen nuestros clientes?</h2>
             </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card reveal">
-                    <span class="testimonial-quote">"</span>
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">Estoy muy contento con la compra. Ha sido super rápido la entrega. Lo recomiendo al 100%.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">FJ</div>
-                        <div>
-                            <div class="author-name">Francisco Javier</div>
-                            <div class="author-badge">Compra verificada</div>
-                        </div>
+            <div class="reviews-carousel-wrap reveal">
+                <div class="reviews-carousel" id="reviewsCarousel">
+                    <div class="reviews-track" id="reviewsTrack">
+                        <article class="review-card">
+                            <div class="review-stars" aria-label="5 estrellas">★★★★★</div>
+                            <div class="review-product">AG-38</div>
+                            <p class="review-text">Envío perfecto al igual que el embalaje. Falta probarlo, aunque no dudo de su eficacia. Hice una consulta y fui perfectamente aconsejado. <span class="read-more">Leer más</span></p>
+                            <div class="review-footer"><span class="review-author">Diego</span><span class="review-more">···</span></div>
+                        </article>
+                        <article class="review-card">
+                            <div class="review-stars" aria-label="5 estrellas">★★★★★</div>
+                            <div class="review-product">Perfecto</div>
+                            <p class="review-text">Es un producto inmejorable, súper contento con él, lo seguiré comprando mientras que lo tengan en su página.</p>
+                            <div class="review-footer"><span class="review-author">Luis</span><span class="review-more">···</span></div>
+                        </article>
+                        <article class="review-card">
+                            <div class="review-stars" aria-label="5 estrellas">★★★★★</div>
+                            <div class="review-product">Baliza Hella</div>
+                            <p class="review-text">Estoy muy contento con la compra. Ha sido super rápido la entrega. Lo recomiendo al 100%.</p>
+                            <div class="review-footer"><span class="review-author">Francisco Javier</span><span class="review-more">···</span></div>
+                        </article>
+                        <article class="review-card">
+                            <div class="review-stars" aria-label="5 estrellas">★★★★★</div>
+                            <div class="review-product">Pack Diésel</div>
+                            <p class="review-text">Envío rápido antes de lo esperado, no lo he probado pero total confianza en la marca y el producto.</p>
+                            <div class="review-footer"><span class="review-author">José María</span><span class="review-more">···</span></div>
+                        </article>
+                        <article class="review-card">
+                            <div class="review-stars" aria-label="5 estrellas">★★★★★</div>
+                            <div class="review-product">AG-31</div>
+                            <p class="review-text">Producto de calidad y atención excelente. Repetiré sin duda en futuras compras.</p>
+                            <div class="review-footer"><span class="review-author">Carlos</span><span class="review-more">···</span></div>
+                        </article>
+                        <article class="review-card">
+                            <div class="review-stars" aria-label="5 estrellas">★★★★★</div>
+                            <div class="review-product">Guante verde</div>
+                            <p class="review-text">Muy buena relación calidad-precio. El envío llegó en perfectas condiciones y muy rápido.</p>
+                            <div class="review-footer"><span class="review-author">Ana</span><span class="review-more">···</span></div>
+                        </article>
                     </div>
                 </div>
-                <div class="testimonial-card reveal">
-                    <span class="testimonial-quote">"</span>
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">Es un producto inmejorable, súper contento con él, lo seguiré comprando mientras que lo tengan en su página.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JM</div>
-                        <div>
-                            <div class="author-name">José María</div>
-                            <div class="author-badge">Compra verificada</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card reveal">
-                    <span class="testimonial-quote">"</span>
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">Envío perfecto al igual que el embalaje. Falta probarlo, aunque no dudo de su eficacia. Fui perfectamente aconsejado.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">D</div>
-                        <div>
-                            <div class="author-name">Diego</div>
-                            <div class="author-badge">Compra verificada</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card reveal">
-                    <span class="testimonial-quote">"</span>
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-text">Envío rápido antes de lo esperado, no lo he probado pero total confianza en la marca y el producto.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">LD</div>
-                        <div>
-                            <div class="author-name">Luis Domínguez</div>
-                            <div class="author-badge">Compra verificada</div>
-                        </div>
-                    </div>
+                <div class="reviews-nav">
+                    <button type="button" id="reviewsPrev" aria-label="Reseña anterior">‹</button>
+                    <button type="button" id="reviewsNext" aria-label="Siguiente reseña">›</button>
                 </div>
             </div>
         </div>
@@ -1381,49 +1578,29 @@
     <!-- FOOTER -->
     <footer class="site-footer">
         <div class="container">
-            <div class="footer-grid">
+            <div class="footer-grid-original">
                 <div class="reveal">
-                    <a href="https://gtautomocion-shop.vercel.app/" class="footer-logo"><img src="a4a95dd05107db56339097357141b145922ca5d1.avif" alt="GT Automoción Shop — Tienda oficial Ángel Gaitán en Aranjuez" width="328" height="50"></a>
-                    <p class="footer-desc">Tienda oficial GT Automoción en Aranjuez (Madrid). Especialistas en productos de automoción, detailing y mantenimiento del vehículo: aditivos diésel y gasolina Ángel Gaitán, limpieza profesional, guantes y accesorios. Envíos a toda España con más de 1.100 reseñas verificadas.</p>
-                    <div class="footer-socials">
-                        <a href="https://www.instagram.com/gtautomocion_shop/" class="social-link" target="_blank" rel="me noopener noreferrer" aria-label="Instagram GT Automoción"><svg><use href="#icon-instagram"/></svg></a>
-                        <a href="https://www.youtube.com/@angelgaitanoficial" class="social-link" target="_blank" rel="me noopener noreferrer" aria-label="YouTube Ángel Gaitán"><svg><use href="#icon-youtube"/></svg></a>
-                        <a href="https://www.facebook.com/gtautomociongt" class="social-link" target="_blank" rel="me noopener noreferrer" aria-label="Facebook GT Automoción"><svg><use href="#icon-facebook"/></svg></a>
-                        <a href="https://www.tiktok.com/@angel_gaitan_oficial" class="social-link" target="_blank" rel="me noopener noreferrer" aria-label="TikTok Ángel Gaitán"><svg><use href="#icon-tiktok"/></svg></a>
+                    <a href="https://gtautomocion-shop.vercel.app/" class="footer-logo"><img src="a4a95dd05107db56339097357141b145922ca5d1.avif" alt="GT Automoción Shop" width="328" height="50"></a>
+                    <div class="footer-map-top">
+                        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1vxbBwSgpYjVFB4b59uU4AQcHYOzvgDA&ehbc=2E312F" loading="lazy" title="Ubicación tienda GT Automoción en Aranjuez, Madrid"></iframe>
                     </div>
                 </div>
-                
                 <div class="reveal">
-                    <h4 class="footer-title">Productos</h4>
+                    <h4 class="footer-title">Nuestros productos</h4>
                     <ul class="footer-links">
                         <li><a href="https://gtautomocion.shop/collections/limpieza">Limpieza</a></li>
                         <li><a href="https://gtautomocion.shop/collections/ag-angel-gaitan">AG - Ángel Gaitán</a></li>
-                        <li><a href="https://gtautomocion.shop/collections/guante-verde">Guante Verde</a></li>
+                        <li><a href="https://gtautomocion.shop/collections/guante-verde">Guante verde</a></li>
                         <li><a href="https://gtautomocion.shop/collections/accesorios-1">Accesorios</a></li>
-                        <li><a href="https://gtautomocion.shop/collections/promociones">Packs y Ofertas</a></li>
                     </ul>
                 </div>
-
                 <div class="reveal">
-                    <h4 class="footer-title">Información</h4>
+                    <h4 class="footer-title">Contacto</h4>
                     <ul class="footer-links">
-                        <li><a href="https://gtautomocion.shop/" rel="noopener noreferrer">Tienda oficial online</a></li>
                         <li><a href="https://gtautomocion.shop/pages/quienes-somos">Quiénes somos</a></li>
                         <li><a href="https://gtautomocion.shop/pages/preguntas-frecuentes">Preguntas Frecuentes</a></li>
                         <li><a href="https://gtautomocion.shop/pages/contact">Contacto</a></li>
-                        <li><a href="https://gtautomocion.shop/pages/aviso-legal">Aviso legal</a></li>
-                        <li><a href="https://gtautomocion.shop/pages/politica-de-privacidad">Política de privacidad</a></li>
-                        <li><a href="https://gtautomocion.shop/pages/politica-de-cookies">Política de cookies</a></li>
-                        <li><a href="https://gtautomocion.shop/policies/refund-policy">Venta y devoluciones</a></li>
                     </ul>
-                </div>
-
-                <div class="reveal">
-                    <h4 class="footer-title">Contacto & Tienda</h4>
-                    <div class="footer-contact-item">
-                        <svg><use href="#icon-map-pin"/></svg>
-                        <span>C/ Antonio Guardiola Sáez, 20,<br>28300, Aranjuez, Madrid.</span>
-                    </div>
                     <div class="footer-contact-item">
                         <svg><use href="#icon-phone"/></svg>
                         <a href="tel:+34919898080">+34 919 89 80 80</a>
@@ -1432,12 +1609,32 @@
                         <svg><use href="#icon-mail"/></svg>
                         <a href="mailto:tienda@grupogt.shop">tienda@grupogt.shop</a>
                     </div>
+                </div>
+                <div class="reveal">
+                    <h4 class="footer-title">Horario</h4>
+                    <p class="footer-desc" style="margin-bottom: 8px;">L-V 8.00-16.00</p>
+                    <p class="footer-desc" style="margin-bottom: 16px;">SÁB 9.00-14.00</p>
                     <div class="footer-contact-item">
-                        <svg><use href="#icon-clock"/></svg>
-                        <span>L-V: 8.00 - 16.00 | Sáb: 9.00 - 14.00</span>
+                        <svg><use href="#icon-map-pin"/></svg>
+                        <span>C/ Antonio Guardiola Sáez, 20, 28300, Aranjuez, Madrid.</span>
                     </div>
-                    <div class="footer-map">
-                        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1vxbBwSgpYjVFB4b59uU4AQcHYOzvgDA&ehbc=2E312F" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" title="Ubicación tienda GT Automoción en Aranjuez, Madrid"></iframe>
+                </div>
+                <div class="reveal">
+                    <h4 class="footer-title">Textos legales</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://gtautomocion.shop/pages/aviso-legal">Aviso legal</a></li>
+                        <li><a href="https://gtautomocion.shop/pages/politica-de-privacidad">Política de privacidad</a></li>
+                        <li><a href="https://gtautomocion.shop/pages/politica-de-cookies">Política de cookies</a></li>
+                        <li><a href="https://gtautomocion.shop/policies/refund-policy">Política venta y devoluciones</a></li>
+                    </ul>
+                </div>
+                <div class="reveal">
+                    <h4 class="footer-title">Social</h4>
+                    <div class="footer-social-list">
+                        <a href="https://www.instagram.com/gtautomocion_shop/" target="_blank" rel="me noopener noreferrer"><svg><use href="#icon-instagram"/></svg> Instagram</a>
+                        <a href="https://www.youtube.com/@angelgaitanoficial" target="_blank" rel="me noopener noreferrer"><svg><use href="#icon-youtube"/></svg> Youtube</a>
+                        <a href="https://www.facebook.com/gtautomociongt" target="_blank" rel="me noopener noreferrer"><svg><use href="#icon-facebook"/></svg> Facebook</a>
+                        <a href="https://www.tiktok.com/@angel_gaitan_oficial" target="_blank" rel="me noopener noreferrer"><svg><use href="#icon-tiktok"/></svg> TikTok</a>
                     </div>
                 </div>
             </div>
@@ -1534,6 +1731,44 @@
 
         startSlider();
 
+        // Reviews Carousel
+        const reviewsTrack = document.getElementById('reviewsTrack');
+        const reviewsPrev = document.getElementById('reviewsPrev');
+        const reviewsNext = document.getElementById('reviewsNext');
+        let reviewIndex = 0;
+
+        function getReviewsPerView() {
+            if (window.innerWidth <= 768) return 1;
+            if (window.innerWidth <= 1024) return 2;
+            return 4;
+        }
+
+        function updateReviewsCarousel() {
+            if (!reviewsTrack) return;
+            const cards = reviewsTrack.querySelectorAll('.review-card');
+            const perView = getReviewsPerView();
+            const maxIndex = Math.max(0, cards.length - perView);
+            reviewIndex = Math.min(reviewIndex, maxIndex);
+            const cardWidth = cards[0]?.offsetWidth || 0;
+            const gap = 20;
+            reviewsTrack.style.transform = `translateX(-${reviewIndex * (cardWidth + gap)}px)`;
+            if (reviewsPrev) reviewsPrev.disabled = reviewIndex === 0;
+            if (reviewsNext) reviewsNext.disabled = reviewIndex >= maxIndex;
+        }
+
+        reviewsPrev?.addEventListener('click', () => {
+            reviewIndex = Math.max(0, reviewIndex - 1);
+            updateReviewsCarousel();
+        });
+        reviewsNext?.addEventListener('click', () => {
+            const cards = reviewsTrack.querySelectorAll('.review-card');
+            const maxIndex = Math.max(0, cards.length - getReviewsPerView());
+            reviewIndex = Math.min(maxIndex, reviewIndex + 1);
+            updateReviewsCarousel();
+        });
+        window.addEventListener('resize', () => { reviewIndex = 0; updateReviewsCarousel(); });
+        updateReviewsCarousel();
+
         // Chat assistant
         const chatPanel = document.getElementById('chatPanel');
         const chatBubble = document.getElementById('chatBubble');
@@ -1613,7 +1848,9 @@
             'BALIZA CONECTADA HELLA': `${SHOP}/products/baliza-conectada-hella`,
             'PULSERA DE ESPAÑA GT AUTOMOCIÓN': `${SHOP}/products/pulsera-de-espana-gt-automocion`,
             'AG-CA LIMPIADOR A PRESIÓN PACK X24': `${SHOP}/products/pack-24-botes-ag-ca`,
-            'AG-13 LUBRICANTE EN SECO PACK X12': `${SHOP}/products/pack-12-botes-ag-13`
+            'AG-CA LIMPIADOR A PRESIÓN PACK X24 UDS.': `${SHOP}/products/pack-24-botes-ag-ca`,
+            'AG-13 LUBRICANTE EN SECO PACK X12': `${SHOP}/products/pack-12-botes-ag-13`,
+            'AG-13 LUBRICANTE EN SECO PACK X12 UDS.': `${SHOP}/products/pack-12-botes-ag-13`
         };
 
         document.querySelectorAll('.btn-add-cart').forEach(btn => {
