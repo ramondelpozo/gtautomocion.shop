@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GT Automoción Shop | Premium Detailing & Automoción</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           VARIABLES & RESET
+           ========================================= */
+        :root {
+            --bg-primary: #050505;
+            --bg-secondary: #0a0a0a;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --bg-glass: rgba(10, 10, 10, 0.7);
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --accent: #00E676;
+            --accent-glow: rgba(0, 230, 118, 0.3);
+            --accent-dark: #00c853;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.2);
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+        button { border: none; background: none; cursor: pointer; font-family: inherit; color: inherit; }
+        .container { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+
+        /* =========================================
+           UTILITIES & ANIMATIONS
+           ========================================= */
+        .section-padding { padding: 120px 0; }
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-subtitle {
+            font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+            color: var(--accent); margin-bottom: 16px; display: inline-block;
+            position: relative; padding: 0 20px;
+        }
+        .section-subtitle::before, .section-subtitle::after {
+            content: ''; position: absolute; top: 50%; width: 30px; height: 1px; background: var(--accent);
+        }
+        .section-subtitle::before { left: -20px; }
+        .section-subtitle::after { right: -20px; }
+        .section-title {
+            font-family: var(--font-heading); font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800; line-height: 1.1; letter-spacing: -1px;
+        }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s var(--transition-smooth); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @keyframes kenBurns {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(-1%, -1%); }
+        }
+        @keyframes scrollTicker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 var(--accent-glow); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 230, 118, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* =========================================
+           HEADER
+           ========================================= */
+        .site-header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 24px 0; transition: all 0.4s ease;
+            border-bottom: 1px solid transparent;
+        }
+        .site-header.scrolled {
+            padding: 16px 0; background: var(--bg-glass);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; }
+        .logo img { height: 45px; width: auto; filter: brightness(0) invert(1); transition: transform 0.3s ease; }
+        .logo:hover img { transform: scale(1.05); }
+
+        .main-nav { display: flex; gap: 40px; }
+        .nav-item { position: relative; }
+        .nav-link {
+            font-size: 14px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase;
+            padding: 10px 0; display: flex; align-items: center; gap: 6px;
+            position: relative;
+        }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+            background: var(--accent); transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover { color: var(--accent); }
+        .nav-link svg { width: 10px; height: 10px; transition: transform 0.3s ease; }
+        .nav-item:hover .nav-link svg { transform: rotate(180deg); }
+
+        .dropdown {
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px);
+            min-width: 260px; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(20px);
+            border: 1px solid var(--border); border-radius: 12px; padding: 12px;
+            opacity: 0; visibility: hidden; transition: all 0.3s var(--transition-smooth);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+        .dropdown a {
+            display: block; padding: 10px 16px; font-size: 13px; font-weight: 400;
+            border-radius: 8px; transition: all 0.2s ease; color: var(--text-secondary);
+        }
+        .dropdown a:hover { background: rgba(255,255,255,0.05); color: var(--accent); padding-left: 24px; }
+
+        .header-actions { display: flex; align-items: center; gap: 24px; }
+        .action-btn {
+            width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--border); transition: all 0.3s ease; position: relative;
+        }
+        .action-btn:hover { border-color: var(--accent); background: rgba(0, 230, 118, 0.1); color: var(--accent); }
+        .action-btn svg { width: 18px; height: 18px; }
+        .cart-count {
+            position: absolute; top: -5px; right: -5px; width: 18px; height: 18px; border-radius: 50%;
+            background: var(--accent); color: #000; font-size: 10px; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .menu-toggle { display: none; width: 40px; height: 40px; flex-direction: column; justify-content: center; align-items: center; gap: 6px; }
+        .menu-toggle span { width: 24px; height: 2px; background: #fff; transition: all 0.3s ease; }
+
+        /* =========================================
+           HERO SLIDER
+           ========================================= */
+        .hero { position: relative; height: 100vh; min-height: 700px; overflow: hidden; }
+        .hero-slide {
+            position: absolute; inset: 0; opacity: 0; transition: opacity 1.5s ease;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hero-slide.active { opacity: 1; z-index: 1; }
+        .hero-slide-bg {
+            position: absolute; inset: 0; background-size: cover; background-position: center;
+            animation: kenBurns 15s ease alternate infinite;
+        }
+        .hero-overlay {
+            position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(5,5,5,0.3), rgba(5,5,5,0.8));
+        }
+        .hero-content {
+            position: relative; z-index: 2; text-align: center; max-width: 900px; padding: 0 24px;
+            animation: fadeUp 1s ease 0.5s both;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px; font-size: 12px; font-weight: 600; letter-spacing: 1px;
+            text-transform: uppercase; margin-bottom: 24px; backdrop-filter: blur(10px);
+        }
+        .hero-badge .stars { color: #FFD700; }
+        .hero-title {
+            font-family: var(--font-heading); font-size: clamp(48px, 8vw, 96px);
+            font-weight: 900; line-height: 0.9; letter-spacing: -2px; margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+        .hero-title span { color: var(--accent); }
+        .hero-desc { font-size: 18px; color: rgba(255,255,255,0.8); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 12px; padding: 18px 40px;
+            background: var(--accent); color: #000; font-weight: 700; font-size: 14px;
+            text-transform: uppercase; letter-spacing: 1px; border-radius: 50px;
+            transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px var(--accent-glow); }
+        .btn-primary svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+        .btn-primary:hover svg { transform: translateX(5px); }
+
+        .hero-dots {
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+            z-index: 10; display: flex; gap: 12px;
+        }
+        .hero-dot {
+            width: 30px; height: 3px; background: rgba(255,255,255,0.3); border-radius: 2px;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .hero-dot.active { background: var(--accent); width: 50px; }
+
+        /* =========================================
+           FEATURES TICKER
+           ========================================= */
+        .ticker-section {
+            padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+            background: var(--bg-secondary); overflow: hidden; position: relative;
+        }
+        .ticker-section::before, .ticker-section::after {
+            content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2; pointer-events: none;
+        }
+        .ticker-section::before { left: 0; background: linear-gradient(to right, var(--bg-secondary), transparent); }
+        .ticker-section::after { right: 0; background: linear-gradient(to left, var(--bg-secondary), transparent); }
+        
+        .ticker-track {
+            display: flex; gap: 80px; animation: scrollTicker 30s linear infinite; width: max-content;
+        }
+        .ticker-item { display: flex; align-items: center; gap: 16px; white-space: nowrap; }
+        .ticker-item svg { width: 32px; height: 32px; color: var(--accent); flex-shrink: 0; }
+        .ticker-item span { font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* =========================================
+           PRODUCT CARDS
+           ========================================= */
+        .products-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px;
+        }
+        .product-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
+            overflow: hidden; transition: all 0.5s var(--transition-smooth); position: relative;
+            display: flex; flex-direction: column;
+        }
+        .product-card:hover {
+            transform: translateY(-10px); border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px var(--accent-glow);
+        }
+        .product-card::before {
+            content: ''; position: absolute; inset: 0; border-radius: 20px;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0,230,118,0.1), transparent 50%);
+            opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
+        }
+        .product-card:hover::before { opacity: 1; }
+
+        .product-badge {
+            position: absolute; top: 16px; left: 16px; z-index: 2;
+            padding: 6px 12px; background: var(--accent); color: #000;
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            border-radius: 6px;
+        }
+        .product-image-wrap {
+            position: relative; padding: 40px; background: rgba(255,255,255,0.02);
+            display: flex; align-items: center; justify-content: center; height: 280px;
+            overflow: hidden;
+        }
+        .product-image-wrap img {
+            max-height: 100%; width: auto; object-fit: contain;
+            transition: transform 0.6s var(--transition-smooth); filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+        .product-card:hover .product-image-wrap img { transform: scale(1.1) rotate(-2deg); }
+        
+        .product-info { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-category { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-weight: 600; }
+        .product-title { font-family: var(--font-heading); font-size: 18px; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
+        .product-prices { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; margin-top: auto; }
+        .price-current { font-size: 24px; font-weight: 800; color: var(--text-primary); }
+        .price-old { font-size: 16px; color: var(--text-secondary); text-decoration: line-through; }
+        
+        .btn-add-cart {
+            width: 100%; padding: 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+            border-radius: 12px; color: #fff; font-weight: 600; font-size: 14px; text-transform: uppercase;
+            letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn-add-cart:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+        .btn-add-cart svg { width: 18px; height: 18px; }
+
+        /* =========================================
+           COLLECTIONS GRID
+           ========================================= */
+        .collections-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 300px 300px; gap: 20px;
+        }
+        .collection-card {
+            position: relative; border-radius: 20px; overflow: hidden; cursor: pointer;
+            border: 1px solid var(--border);
+        }
+        .collection-card.large { grid-column: span 2; grid-row: span 2; }
+        .collection-card img {
+            width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease;
+        }
+        .collection-card:hover img { transform: scale(1.1); }
+        .collection-overlay {
+            position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent 60%);
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 30px;
+        }
+        .collection-title {
+            font-family: var(--font-heading); font-size: 24px; font-weight: 800;
+            text-transform: uppercase; margin-bottom: 12px;
+        }
+        .collection-link {
+            display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600;
+            color: var(--accent); text-transform: uppercase; letter-spacing: 1px;
+        }
+        .collection-link svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+        .collection-card:hover .collection-link svg { transform: translateX(5px); }
+
+        /* =========================================
+           TABS
+           ========================================= */
+        .tabs-nav {
+            display: flex; justify-content: center; gap: 40px; margin-bottom: 60px;
+            border-bottom: 1px solid var(--border); padding-bottom: 20px;
+        }
+        .tab-btn {
+            font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--text-secondary); padding: 10px 0; position: relative; transition: color 0.3s ease;
+        }
+        .tab-btn.active { color: var(--text-primary); }
+        .tab-btn::after {
+            content: ''; position: absolute; bottom: -21px; left: 0; width: 100%; height: 2px;
+            background: var(--accent); transform: scaleX(0); transition: transform 0.3s ease;
+        }
+        .tab-btn.active::after { transform: scaleX(1); }
+        .tab-content { display: none; animation: fadeUp 0.5s ease; }
+        .tab-content.active { display: block; }
+
+        /* =========================================
+           TESTIMONIALS
+           ========================================= */
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .testimonial-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
+            padding: 40px; position: relative; transition: all 0.3s ease;
+        }
+        .testimonial-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .testimonial-quote {
+            position: absolute; top: 20px; right: 30px; font-size: 80px; font-family: serif;
+            color: var(--accent); opacity: 0.2; line-height: 1;
+        }
+        .testimonial-stars { color: #FFD700; font-size: 18px; margin-bottom: 20px; letter-spacing: 2px; }
+        .testimonial-text { font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px; font-style: italic; }
+        .testimonial-author { display: flex; align-items: center; gap: 12px; }
+        .author-avatar {
+            width: 40px; height: 40px; border-radius: 50%; background: var(--accent);
+            display: flex; align-items: center; justify-content: center; color: #000; font-weight: 700;
+        }
+        .author-name { font-weight: 600; font-size: 14px; }
+        .author-badge { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        .site-footer {
+            background: var(--bg-secondary); border-top: 1px solid var(--border); padding: 100px 0 40px;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 60px; margin-bottom: 80px;
+        }
+        .footer-logo img { height: 50px; filter: brightness(0) invert(1); margin-bottom: 24px; }
+        .footer-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px; }
+        .footer-socials { display: flex; gap: 12px; }
+        .social-link {
+            width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
+        }
+        .social-link:hover { border-color: var(--accent); background: var(--accent); color: #000; transform: translateY(-3px); }
+        .social-link svg { width: 18px; height: 18px; }
+
+        .footer-title {
+            font-family: var(--font-heading); font-size: 16px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px;
+            position: relative; padding-bottom: 12px;
+        }
+        .footer-title::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 30px; height: 2px; background: var(--accent);
+        }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { font-size: 14px; color: var(--text-secondary); transition: all 0.3s ease; }
+        .footer-links a:hover { color: var(--accent); padding-left: 5px; }
+        
+        .footer-contact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; font-size: 14px; color: var(--text-secondary); }
+        .footer-contact-item svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+
+        .footer-map {
+            width: 100%; height: 200px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
+            filter: invert(90%) hue-rotate(180deg) grayscale(0.5) contrast(0.8);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border); padding-top: 40px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+        }
+        .copyright { font-size: 13px; color: var(--text-secondary); }
+        .footer-legal { display: flex; gap: 24px; }
+        .footer-legal a { font-size: 13px; color: var(--text-secondary); }
+        .footer-legal a:hover { color: var(--accent); }
+
+        /* =========================================
+           WHATSAPP FLOAT
+           ========================================= */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; z-index: 999;
+            width: 60px; height: 60px; border-radius: 50%; background: #25D366;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            animation: pulse 2s infinite; transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        .whatsapp-float svg { width: 32px; height: 32px; fill: #fff; }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 1024px) {
+            .main-nav { display: none; }
+            .menu-toggle { display: flex; }
+            .collections-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+            .collection-card.large { grid-column: span 2; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .section-padding { padding: 80px 0; }
+            .hero { min-height: 600px; }
+            .hero-title { font-size: 48px; }
+            .tabs-nav { gap: 20px; overflow-x: auto; justify-content: flex-start; padding-bottom: 15px; }
+            .tab-btn { white-space: nowrap; font-size: 13px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-legal { flex-wrap: wrap; justify-content: center; }
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu {
+            position: fixed; inset: 0; background: rgba(5,5,5,0.98); z-index: 2000;
+            display: flex; flex-direction: column; padding: 80px 24px 40px;
+            transform: translateX(100%); transition: transform 0.5s var(--transition-smooth);
+        }
+        .mobile-menu.open { transform: translateX(0); }
+        .mobile-menu-close { position: absolute; top: 24px; right: 24px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+        .mobile-menu-close svg { width: 24px; height: 24px; }
+        .mobile-nav { display: flex; flex-direction: column; gap: 24px; overflow-y: auto; }
+        .mobile-nav a { font-size: 24px; font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; }
+        .mobile-nav a:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <!-- SVG SPRITE -->
+    <svg style="display: none;">
+        <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></symbol>
+        <symbol id="icon-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></symbol>
+        <symbol id="icon-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></symbol>
+        <symbol id="icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></symbol>
+        <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></symbol>
+        <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></symbol>
+        <symbol id="icon-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
+        <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></symbol>
+        <symbol id="icon-youtube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></symbol>
+        <symbol id="icon-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></symbol>
+        <symbol id="icon-tiktok" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></symbol>
+        <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></symbol>
+        <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></symbol>
+        <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></symbol>
+        <symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></symbol>
+        
+        <!-- Feature Icons -->
+        <symbol id="feat-trato" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></symbol>
+        <symbol id="feat-calidad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></symbol>
+        <symbol id="feat-etiqueta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></symbol>
+        <symbol id="feat-formula" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></symbol>
+        <symbol id="feat-rendimiento" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></symbol>
+        <symbol id="feat-envio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></symbol>
+        <symbol id="feat-seguro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></symbol>
+        <symbol id="feat-alta-calidad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 15l-2 5l-3-3l-5 2l2-5l-3-3l5-2l-2-5l5 2l3-3l2 5l5-2l-3 3l5 2l-5 2l3 3l-5-2z"></path></symbol>
+    </svg>
+
+    <!-- HEADER -->
+    <header class="site-header" id="header">
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <img src="https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=328" alt="GT Automoción">
+            </a>
+            
+            <nav class="main-nav">
+                <div class="nav-item"><a href="#" class="nav-link">Todos</a></div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link">Limpieza <svg><use href="#icon-chevron"/></svg></a>
+                    <div class="dropdown">
+                        <a href="#">CEO</a><a href="#">Toallitas CEO</a><a href="#">Neutralizador de Olores</a>
+                        <a href="#">Antilluvia</a><a href="#">Limpiacristales</a><a href="#">Packs Limpieza</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link">AG-Ángel Gaitán <svg><use href="#icon-chevron"/></svg></a>
+                    <div class="dropdown">
+                        <a href="#">AG-CA Limpiador a Presión</a><a href="#">AG-01 Limpiador Motor</a>
+                        <a href="#">AG-02 Antifricción</a><a href="#">AG-10 Higiene Ventilación</a>
+                        <a href="#">AG-13 Lubricante Seco</a><a href="#">AG-22 Antirroedores</a>
+                        <a href="#">AG-30 Tratamiento Diésel</a><a href="#">AG-31 Inyección Diésel</a>
+                        <a href="#">AG-38 Anticristalizante</a><a href="#">AG-40 Tratamiento Gasolina</a>
+                        <a href="#">AG-41 Inyección Gasolina</a><a href="#">AG-Packs</a>
+                    </div>
+                </div>
+                <div class="nav-item"><a href="#" class="nav-link">Guante Verde</a></div>
+                <div class="nav-item"><a href="#" class="nav-link">Accesorios</a></div>
+            </nav>
+
+            <div class="header-actions">
+                <button class="action-btn"><svg><use href="#icon-search"/></svg></button>
+                <button class="action-btn"><svg><use href="#icon-user"/></svg></button>
+                <button class="action-btn">
+                    <svg><use href="#icon-cart"/></svg>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="menuClose"><svg><use href="#icon-close"/></svg></button>
+        <nav class="mobile-nav">
+            <a href="#">Todos los productos</a>
+            <a href="#">Limpieza</a>
+            <a href="#">AG-Ángel Gaitán</a>
+            <a href="#">Guante Verde</a>
+            <a href="#">Accesorios</a>
+            <a href="#">Contacto</a>
+        </nav>
+    </div>
+
+    <!-- HERO SLIDER -->
+    <section class="hero">
+        <div class="hero-slide active" data-slide="0">
+            <div class="hero-slide-bg" style="background-image: url('https://gtautomocion.shop/cdn/shop/files/Group_19_1.png?v=1780487500&width=2400')"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-badge"><span class="stars">★★★★★</span> 1103 Reseñas Verificadas</div>
+                <h1 class="hero-title">¡<span>GRATIS</span>!</h1>
+                <p class="hero-desc">Por la compra de cualquier producto. Disponible en la web y en la tienda física.</p>
+                <a href="#" class="btn-primary">Comprar ahora <svg><use href="#icon-arrow-right"/></svg></a>
+            </div>
+        </div>
+        <div class="hero-slide" data-slide="1">
+            <div class="hero-slide-bg" style="background-image: url('https://gtautomocion.shop/cdn/shop/files/Group_13.png?v=1779283717&width=2400')"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-badge"><span class="stars">★★★★★</span> Best Seller</div>
+                <h1 class="hero-title">PACK <span>LIMPIEZA</span></h1>
+                <p class="hero-desc">Neutralizador de olores 500ml + Toallitas CEO + Nitro24</p>
+                <a href="#" class="btn-primary">Ver Pack <svg><use href="#icon-arrow-right"/></svg></a>
+            </div>
+        </div>
+        <div class="hero-slide" data-slide="2">
+            <div class="hero-slide-bg" style="background-image: url('https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL-web.png?v=1770639456&width=2400')"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-badge"><span class="stars">★★★★★</span> Oferta Limitada</div>
+                <h1 class="hero-title">PACK <span>DIÉSEL</span></h1>
+                <p class="hero-desc">AG-30 + AG-31 POR 45€</p>
+                <a href="#" class="btn-primary">Comprar Pack <svg><use href="#icon-arrow-right"/></svg></a>
+            </div>
+        </div>
+        <div class="hero-slide" data-slide="3">
+            <div class="hero-slide-bg" style="background-image: url('https://gtautomocion.shop/cdn/shop/files/Hero1.png?v=1767398900&width=2400')"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-badge"><span class="stars">★★★★★</span> Selección Oficial</div>
+                <h1 class="hero-title">ÁNGEL <span>GAITÁN</span></h1>
+                <p class="hero-desc">La gama completa de aditivos, limpieza y accesorios recomendados por Ángel Gaitán.</p>
+                <a href="#" class="btn-primary">Explorar Gama <svg><use href="#icon-arrow-right"/></svg></a>
+            </div>
+        </div>
+
+        <div class="hero-dots">
+            <div class="hero-dot active" data-slide="0"></div>
+            <div class="hero-dot" data-slide="1"></div>
+            <div class="hero-dot" data-slide="2"></div>
+            <div class="hero-dot" data-slide="3"></div>
+        </div>
+    </section>
+
+    <!-- FEATURES TICKER -->
+    <section class="ticker-section">
+        <div class="ticker-track">
+            <div class="ticker-item"><svg><use href="#feat-trato"/></svg><span>Trato Directo</span></div>
+            <div class="ticker-item"><svg><use href="#feat-calidad"/></svg><span>Calidad Profesional</span></div>
+            <div class="ticker-item"><svg><use href="#feat-etiqueta"/></svg><span>Etiquetado Transparente</span></div>
+            <div class="ticker-item"><svg><use href="#feat-formula"/></svg><span>Fórmulas Verificadas</span></div>
+            <div class="ticker-item"><svg><use href="#feat-rendimiento"/></svg><span>Máximo Rendimiento</span></div>
+            <div class="ticker-item"><svg><use href="#feat-envio"/></svg><span>Envíos a toda España</span></div>
+            <div class="ticker-item"><svg><use href="#feat-seguro"/></svg><span>Pago 100% Seguro</span></div>
+            <!-- Duplicado para loop infinito -->
+            <div class="ticker-item"><svg><use href="#feat-trato"/></svg><span>Trato Directo</span></div>
+            <div class="ticker-item"><svg><use href="#feat-calidad"/></svg><span>Calidad Profesional</span></div>
+            <div class="ticker-item"><svg><use href="#feat-etiqueta"/></svg><span>Etiquetado Transparente</span></div>
+            <div class="ticker-item"><svg><use href="#feat-formula"/></svg><span>Fórmulas Verificadas</span></div>
+            <div class="ticker-item"><svg><use href="#feat-rendimiento"/></svg><span>Máximo Rendimiento</span></div>
+            <div class="ticker-item"><svg><use href="#feat-envio"/></svg><span>Envíos a toda España</span></div>
+            <div class="ticker-item"><svg><use href="#feat-seguro"/></svg><span>Pago 100% Seguro</span></div>
+        </div>
+    </section>
+
+    <!-- LATEST PRODUCTS -->
+    <section class="section-padding" style="background: var(--bg-primary);">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">Novedades</span>
+                <h2 class="section-title">Últimos Productos</h2>
+            </div>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card reveal">
+                    <span class="product-badge">Más Vendido</span>
+                    <div class="product-image-wrap">
+                        <img src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL.png?v=1770638263&width=400" alt="PACK DIÉSEL">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Pack Diésel</span>
+                        <h3 class="product-title">PACK DIÉSEL</h3>
+                        <div class="product-prices">
+                            <span class="price-current">45,00€</span>
+                            <span class="price-old">52,00€</span>
+                        </div>
+                        <button class="btn-add-cart">
+                            <svg><use href="#icon-cart"/></svg> Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card reveal">
+                    <span class="product-badge">Oferta</span>
+                    <div class="product-image-wrap">
+                        <img src="https://gtautomocion.shop/cdn/shop/files/Pack-AG-40-y-AG-41_5b643349-4d94-475d-9b93-a2f6631e6c56.png?v=1770041173&width=400" alt="PACK GASOLINA">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Pack Gasolina</span>
+                        <h3 class="product-title">PACK GASOLINA</h3>
+                        <div class="product-prices">
+                            <span class="price-current">43,00€</span>
+                            <span class="price-old">50,00€</span>
+                        </div>
+                        <button class="btn-add-cart">
+                            <svg><use href="#icon-cart"/></svg> Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card reveal">
+                    <div class="product-image-wrap">
+                        <img src="https://gtautomocion.shop/cdn/shop/files/ag-31-1500x1500_0f86d349-ef39-4929-823e-c894ed2e19b5.png?v=1768396562&width=400" alt="AG-31">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Ángel Gaitán</span>
+                        <h3 class="product-title">AG-31 LIMPIADOR INYECCIÓN DIÉSEL</h3>
+                        <div class="product-prices">
+                            <span class="price-current">27,00€</span>
+                        </div>
+                        <button class="btn-add-cart">
+                            <svg><use href="#icon-cart"/></svg> Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="product-card reveal">
+                    <div class="product-image-wrap">
+                        <img src="https://gtautomocion.shop/cdn/shop/files/limpia-cristales-1500x1500_fcc71c7f-df3d-4f65-931c-2b0e53212fa9_1.png?v=1768323027&width=400" alt="LIMPIACRISTALES">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Limpieza</span>
+                        <h3 class="product-title">LIMPIACRISTALES MANZANA</h3>
+                        <div class="product-prices">
+                            <span class="price-current">16,00€</span>
+                        </div>
+                        <button class="btn-add-cart">
+                            <svg><use href="#icon-cart"/></svg> Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COLLECTIONS -->
+    <section class="section-padding" style="background: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">Categorías</span>
+                <h2 class="section-title">Nuestras Colecciones</h2>
+            </div>
+            <div class="collections-grid">
+                <a href="#" class="collection-card large reveal">
+                    <img src="https://gtautomocion.shop/cdn/shop/files/2_04cfcf99-8317-4ab7-b81f-9ed4271728bb.png?v=1767553551&width=800" alt="Más vendidos">
+                    <div class="collection-overlay">
+                        <h3 class="collection-title">Más Vendidos</h3>
+                        <span class="collection-link">Explorar <svg><use href="#icon-arrow-right"/></svg></span>
+                    </div>
+                </a>
+                <a href="#" class="collection-card reveal">
+                    <img src="https://gtautomocion.shop/cdn/shop/files/e1f8486d70662bda05c07e04fd8ae5b103b259fb.png?v=1766921218&width=600" alt="AG-Ángel Gaitán">
+                    <div class="collection-overlay">
+                        <h3 class="collection-title">AG-Ángel Gaitán</h3>
+                        <span class="collection-link">Ver gama <svg><use href="#icon-arrow-right"/></svg></span>
+                    </div>
+                </a>
+                <a href="#" class="collection-card reveal">
+                    <img src="https://gtautomocion.shop/cdn/shop/files/50aee63086f184c071e87fad63145f21375c2446.png?v=1766921215&width=400" alt="Guante verde">
+                    <div class="collection-overlay">
+                        <h3 class="collection-title">Guante Verde</h3>
+                        <span class="collection-link">Ver productos <svg><use href="#icon-arrow-right"/></svg></span>
+                    </div>
+                </a>
+                <a href="#" class="collection-card reveal" style="grid-column: span 2;">
+                    <img src="https://gtautomocion.shop/cdn/shop/files/55ecef5b33fa228ddd0e8ce50b4e2d222bb066b4.png?v=1766921337&width=400" alt="Accesorios">
+                    <div class="collection-overlay">
+                        <h3 class="collection-title">Accesorios</h3>
+                        <span class="collection-link">Ver todo <svg><use href="#icon-arrow-right"/></svg></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- OUR PRODUCTS (TABS) -->
+    <section class="section-padding" style="background: var(--bg-primary);">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">Catálogo</span>
+                <h2 class="section-title">Nuestros Productos</h2>
+            </div>
+            
+            <div class="tabs-nav reveal">
+                <button class="tab-btn active" data-tab="tab-ag">AG-Ángel Gaitán</button>
+                <button class="tab-btn" data-tab="tab-limpieza">Limpieza</button>
+                <button class="tab-btn" data-tab="tab-guante">Guante Verde</button>
+                <button class="tab-btn" data-tab="tab-accesorios">Accesorios</button>
+            </div>
+
+            <div class="tab-content active" id="tab-ag">
+                <div class="products-grid">
+                    <div class="product-card reveal">
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/ag-31-1500x1500_0f86d349-ef39-4929-823e-c894ed2e19b5.png?v=1768396562&width=400" alt="AG-31"></div>
+                        <div class="product-info">
+                            <span class="product-category">Inyección</span>
+                            <h3 class="product-title">AG-31 LIMPIADOR INYECCIÓN DIÉSEL</h3>
+                            <div class="product-prices"><span class="price-current">27,00€</span></div>
+                            <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                        </div>
+                    </div>
+                    <div class="product-card reveal">
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/image_3.webp?v=1768326102&width=400" alt="AG-41"></div>
+                        <div class="product-info">
+                            <span class="product-category">Inyección</span>
+                            <h3 class="product-title">AG-41 LIMPIADOR INYECCIÓN GASOLINA</h3>
+                            <div class="product-prices"><span class="price-current">26,00€</span></div>
+                            <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                        </div>
+                    </div>
+                    <div class="product-card reveal">
+                        <span class="product-badge">Pack</span>
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL.png?v=1770638263&width=400" alt="PACK DIÉSEL"></div>
+                        <div class="product-info">
+                            <span class="product-category">Packs</span>
+                            <h3 class="product-title">PACK DIÉSEL (AG-30 + AG-31)</h3>
+                            <div class="product-prices"><span class="price-current">45,00€</span><span class="price-old">52,00€</span></div>
+                            <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-limpieza">
+                <div class="products-grid">
+                    <div class="product-card reveal">
+                        <span class="product-badge">Top Ventas</span>
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/IMG_1822-removebg-preview.png?v=1779282976&width=400" alt="PACK LIMPIEZA"></div>
+                        <div class="product-info">
+                            <span class="product-category">Packs</span>
+                            <h3 class="product-title">PACK LIMPIEZA (CEO + Toallitas + Nitro24)</h3>
+                            <div class="product-prices"><span class="price-current">35,00€</span></div>
+                            <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                        </div>
+                    </div>
+                    <div class="product-card reveal">
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/sin_fondo-removebg-preview.png?v=1774010981&width=400" alt="NITRO24"></div>
+                        <div class="product-info">
+                            <span class="product-category">Ambientador</span>
+                            <h3 class="product-title">NITRO24 AMBIENTADOR LARGA DURACIÓN</h3>
+                            <div class="product-prices"><span class="price-current">16,00€</span></div>
+                            <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                        </div>
+                    </div>
+                    <div class="product-card reveal">
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/limpia-cristales-1500x1500_fcc71c7f-df3d-4f65-931c-2b0e53212fa9_1.png?v=1768323027&width=400" alt="LIMPIACRISTALES"></div>
+                        <div class="product-info">
+                            <span class="product-category">Cristales</span>
+                            <h3 class="product-title">LIMPIACRISTALES MANZANA</h3>
+                            <div class="product-prices"><span class="price-current">16,00€</span></div>
+                            <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-guante">
+                <div class="products-grid">
+                    <div class="product-card reveal">
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/caja-guantes-1500_626f23a0-6bf1-47c5-b7df-f1eef6e72b85.png?v=1768324206&width=400" alt="CAJA GUANTES"></div>
+                        <div class="product-info">
+                            <span class="product-category">Guantes</span>
+                            <h3 class="product-title">CAJA DE GUANTES DIAMANTADOS</h3>
+                            <div class="product-prices"><span class="price-current">13,00€</span></div>
+                            <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                        </div>
+                    </div>
+                    <div class="product-card reveal">
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/cubo-guante-diamantado_2cc15a77-f5a9-4146-a773-c3b772869f63.png?v=1768324237&width=400" alt="CUBO GUANTES"></div>
+                        <div class="product-info">
+                            <span class="product-category">Guantes</span>
+                            <h3 class="product-title">CUBO DE GUANTES VERDES DIAMANTADOS</h3>
+                            <div class="product-prices"><span class="price-current">29,99€</span></div>
+                            <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-accesorios">
+                <div class="products-grid">
+                    <div class="product-card reveal">
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/todos-los-lanyard.webp?v=1770969857&width=400" alt="LANYARD"></div>
+                        <div class="product-info">
+                            <span class="product-category">Merchandising</span>
+                            <h3 class="product-title">LANYARDS GT AUTOMOCIÓN</h3>
+                            <div class="product-prices"><span class="price-current">6,00€</span></div>
+                            <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                        </div>
+                    </div>
+                    <div class="product-card reveal">
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/baliza-hella_5c52e8b4-927a-475d-9d8e-f75f15a1c232.png?v=1768397783&width=400" alt="BALIZA HELLA"></div>
+                        <div class="product-info">
+                            <span class="product-category">Seguridad</span>
+                            <h3 class="product-title">BALIZA CONECTADA HELLA</h3>
+                            <div class="product-prices"><span class="price-current">44,95€</span></div>
+                            <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                        </div>
+                    </div>
+                    <div class="product-card reveal">
+                        <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/pulsera_1.webp?v=1768326225&width=400" alt="PULSERA"></div>
+                        <div class="product-info">
+                            <span class="product-category">Merchandising</span>
+                            <h3 class="product-title">PULSERA DE ESPAÑA GT AUTOMOCIÓN</h3>
+                            <div class="product-prices"><span class="price-current">6,00€</span></div>
+                            <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEST SELLERS -->
+    <section class="section-padding" style="background: var(--bg-secondary);">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">Los favoritos</span>
+                <h2 class="section-title">Más Vendidos</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card reveal">
+                    <span class="product-badge">-13%</span>
+                    <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/Pack-24-AG-CA-_2_f1edf52b-9979-4203-b9a2-6950a0d5c3c1.png?v=1768395577&width=400" alt="AG-CA PACK"></div>
+                    <div class="product-info">
+                        <span class="product-category">Pack Profesional</span>
+                        <h3 class="product-title">AG-CA LIMPIADOR A PRESIÓN PACK X24</h3>
+                        <div class="product-prices"><span class="price-current">125,00€</span><span class="price-old">143,76€</span></div>
+                        <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                    </div>
+                </div>
+                <div class="product-card reveal">
+                    <span class="product-badge">-15%</span>
+                    <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/Pack-12-AG-13-1500PX_c1ccbd4b-55ba-445a-9450-dce5ff07f12c.png?v=1768398065&width=400" alt="AG-13 PACK"></div>
+                    <div class="product-info">
+                        <span class="product-category">Pack Profesional</span>
+                        <h3 class="product-title">AG-13 LUBRICANTE EN SECO PACK X12</h3>
+                        <div class="product-prices"><span class="price-current">245,00€</span><span class="price-old">288,00€</span></div>
+                        <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                    </div>
+                </div>
+                <div class="product-card reveal">
+                    <span class="product-badge">Top</span>
+                    <div class="product-image-wrap"><img src="https://gtautomocion.shop/cdn/shop/files/PACK-DIESEL.png?v=1770638263&width=400" alt="PACK DIÉSEL"></div>
+                    <div class="product-info">
+                        <span class="product-category">Pack Diésel</span>
+                        <h3 class="product-title">PACK DIÉSEL (AG-30 + AG-31)</h3>
+                        <div class="product-prices"><span class="price-current">45,00€</span><span class="price-old">52,00€</span></div>
+                        <button class="btn-add-cart"><svg><use href="#icon-cart"/></svg> Añadir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section-padding" style="background: var(--bg-primary);">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-subtitle">Opiniones</span>
+                <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <span class="testimonial-quote">"</span>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">Estoy muy contento con la compra. Ha sido super rápido la entrega. Lo recomiendo al 100%.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">FJ</div>
+                        <div>
+                            <div class="author-name">Francisco Javier</div>
+                            <div class="author-badge">Compra verificada</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <span class="testimonial-quote">"</span>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">Es un producto inmejorable, súper contento con él, lo seguiré comprando mientras que lo tengan en su página.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JM</div>
+                        <div>
+                            <div class="author-name">José María</div>
+                            <div class="author-badge">Compra verificada</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <span class="testimonial-quote">"</span>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">Envío perfecto al igual que el embalaje. Falta probarlo, aunque no dudo de su eficacia. Fui perfectamente aconsejado.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">D</div>
+                        <div>
+                            <div class="author-name">Diego</div>
+                            <div class="author-badge">Compra verificada</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <span class="testimonial-quote">"</span>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">Envío rápido antes de lo esperado, no lo he probado pero total confianza en la marca y el producto.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">LD</div>
+                        <div>
+                            <div class="author-name">Luis Domínguez</div>
+                            <div class="author-badge">Compra verificada</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="reveal">
+                    <a href="#" class="footer-logo"><img src="https://gtautomocion.shop/cdn/shop/files/a4a95dd05107db56339097357141b145922ca5d1.png?v=1766684146&width=328" alt="GT Automoción"></a>
+                    <p class="footer-desc">Especialistas en productos de automoción, detailing y mantenimiento del vehículo. Calidad profesional con el asesoramiento de Ángel Gaitán.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/gtautomocion_shop/" class="social-link" target="_blank"><svg><use href="#icon-instagram"/></svg></a>
+                        <a href="https://www.youtube.com/@angelgaitanoficial" class="social-link" target="_blank"><svg><use href="#icon-youtube"/></svg></a>
+                        <a href="https://www.facebook.com/gtautomociongt" class="social-link" target="_blank"><svg><use href="#icon-facebook"/></svg></a>
+                        <a href="https://www.tiktok.com/@angel_gaitan_oficial" class="social-link" target="_blank"><svg><use href="#icon-tiktok"/></svg></a>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <h4 class="footer-title">Productos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Limpieza</a></li>
+                        <li><a href="#">AG - Ángel Gaitán</a></li>
+                        <li><a href="#">Guante Verde</a></li>
+                        <li><a href="#">Accesorios</a></li>
+                        <li><a href="#">Packs y Ofertas</a></li>
+                    </ul>
+                </div>
+
+                <div class="reveal">
+                    <h4 class="footer-title">Información</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Quiénes somos</a></li>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">Aviso legal</a></li>
+                        <li><a href="#">Política de privacidad</a></li>
+                        <li><a href="#">Política de cookies</a></li>
+                        <li><a href="#">Venta y devoluciones</a></li>
+                    </ul>
+                </div>
+
+                <div class="reveal">
+                    <h4 class="footer-title">Contacto & Tienda</h4>
+                    <div class="footer-contact-item">
+                        <svg><use href="#icon-map-pin"/></svg>
+                        <span>C/ Antonio Guardiola Sáez, 20,<br>28300, Aranjuez, Madrid.</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg><use href="#icon-phone"/></svg>
+                        <a href="tel:+34919898080">+34 919 89 80 80</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg><use href="#icon-mail"/></svg>
+                        <a href="mailto:tienda@grupogt.shop">tienda@grupogt.shop</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg><use href="#icon-clock"/></svg>
+                        <span>L-V: 8.00 - 16.00 | Sáb: 9.00 - 14.00</span>
+                    </div>
+                    <div class="footer-map">
+                        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1vxbBwSgpYjVFB4b59uU4AQcHYOzvgDA&ehbc=2E312F" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">&copy; 2026 GT Automoción Shop. Todos los derechos reservados.</p>
+                <div class="footer-legal">
+                    <a href="#">España | EUR €</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://api.whatsapp.com/send?phone=34722622822" target="_blank" class="whatsapp-float">
+        <svg><use href="#icon-whatsapp"/></svg>
+    </a>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        // Mobile Menu
+        const menuToggle = document.getElementById('menuToggle');
+        const menuClose = document.getElementById('menuClose');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+        menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+
+        // Hero Slider
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.hero-dot');
+        let currentSlide = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            let next = (currentSlide + 1) % slides.length;
+            showSlide(next);
+        }
+
+        function startSlider() {
+            slideInterval = setInterval(nextSlide, 6000);
+        }
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                showSlide(i);
+                startSlider();
+            });
+        });
+
+        startSlider();
+
+        // Tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+                
+                // Re-trigger reveal animations for new tab content
+                const newReveals = document.getElementById(btn.dataset.tab).querySelectorAll('.reveal');
+                newReveals.forEach(el => {
+                    el.classList.remove('active');
+                    setTimeout(() => el.classList.add('active'), 50);
+                });
+            });
+        });
+
+        // Scroll Reveal Animation
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(el => observer.observe(el));
+
+        // Product Card Mouse Glow Effect
+        const cards = document.querySelectorAll('.product-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mouse-x', x + '%');
+                card.style.setProperty('--mouse-y', y + '%');
+            });
+        });
+    </script>
+</body>
+</html>
